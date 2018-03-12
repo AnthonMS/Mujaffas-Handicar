@@ -6,136 +6,60 @@ public class PlayerMotorNew : MonoBehaviour
 {
 
     public float speed = 5f;
-    public float forwardLength = 5f;
+    private const float LANE_DISTANCE = 2f;
+    private const float FRONT_BACK_DISTANCE = 3f;
 
-    private int lane = 1; // 0 for left lane, 1 for middle lane, 2 for right lane
-    //private int desiredLane = 1;
-    private const float LANE_DISTANCE = 2.5f;
-    private GameObject leftLane, middleLane, rightLane;
-    private Vector2 orgPos;
-    private Vector2 frontPos;
-    private Vector2 backPos;
-    private bool moveUp = false;
-    private bool moveDown = false;
-    private bool moveSide = false;
-    private bool canMoveUp = true;
-    private bool canMoveDown = false;
-    private bool canMoveSide = true;
-    private Vector2 leftOrgPos, middleOrgPos, rightOrgPos, newLeftPos, newMiddlePos, newRightPos;
+    private GameObject player;
+    private GameObject laneTarget;
+    // All the positions for the LaneTarget
+    private Vector2 leftLaneBack, middleLaneBack, rightLaneBack, leftLaneFront, middleLaneFront, rightLaneFront;
+    private int lane = 1; // 0 = Left, 1 = Middle, 2 = Right
+    private int backFront = 0; // 0 = Back, 1 = Front
 
     // Use this for initialization
     void Start()
     {
-        leftLane = GameObject.FindGameObjectWithTag("LeftLane");
-        middleLane = GameObject.FindGameObjectWithTag("MiddleLane");
-        rightLane = GameObject.FindGameObjectWithTag("RightLane");
-        orgPos = transform.position;
-        frontPos = new Vector2(orgPos.x, orgPos.y + 2.5f);
-        backPos = orgPos;
-        leftOrgPos = leftLane.transform.position;
-        middleOrgPos = middleLane.transform.position;
-        rightOrgPos = rightLane.transform.position;
-        newLeftPos = new Vector2(leftLane.transform.position.x, leftLane.transform.position.y + 2.5f);
-        newMiddlePos = new Vector2(middleLane.transform.position.x, middleLane.transform.position.y + 2.5f);
-        newRightPos = new Vector2(rightLane.transform.position.x, rightLane.transform.position.y + 2.5f);
+        player = GameObject.FindGameObjectWithTag("Player");
+        laneTarget = GameObject.FindGameObjectWithTag("TargetPoint");
+        InitializeLanePos();
+        //Debug.Log("LeftLanes: " + leftLaneBack + ", " + leftLaneFront);
+        //Debug.Log("MiddleLanes: " + middleLaneBack + ", " + middleLaneFront);
+        //Debug.Log("RightLanes: " + rightLaneBack + ", " + rightLaneFront);
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Gather keyboard Input
-        if (Input.GetKeyDown(KeyCode.LeftArrow) && canMoveSide)
-        {
-            // Move left
-            MoveLane(false);
-            canMoveUp = false;
-            canMoveDown = false;
-            //Debug.Log("Lane: " + lane);
-        }
-
-        if (Input.GetKeyDown(KeyCode.RightArrow) && canMoveSide)
-        {
-            // Move right
-            MoveLane(true);
-            canMoveUp = false;
-            canMoveDown = false;
-            //Debug.Log("Lane: " + lane);
-        }
-
-        if (Input.GetKeyDown(KeyCode.UpArrow) && canMoveUp)
-        {
-            moveDown = false;
-            moveUp = true;
-            canMoveDown = true;
-        }
-            
-
-        if (Input.GetKeyDown(KeyCode.DownArrow) && canMoveDown)
-        {
-            moveUp = false;
-            moveDown = true;
-            canMoveUp = true;
-        }
-            
-
-        if (moveDown)
-            MoveDown();
-
-        if (moveUp)
-            MoveUp();
-
-        // Move the player to the lane
-        if (moveSide)
-            MovePlayer();
+        GetKeyboardInput();
+        // transform.position = Vector2.MoveTowards(transform.position, frontPos, speed * Time.deltaTime);
+        player.transform.position = Vector2.MoveTowards(player.transform.position, laneTarget.transform.position, speed * Time.deltaTime);
     }
 
-    private void MovePlayer()
+    private void GetKeyboardInput()
     {
-        if (lane == 1)
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            //Debug.Log("MOVE TO THE MIDDLE");
-            transform.position = Vector2.MoveTowards(transform.position, middleLane.transform.position, speed * Time.deltaTime);
-            
-            if (Vector3.Distance(transform.position, middleLane.transform.position) <= 0)
-            {
-                frontPos = new Vector2(transform.position.x, orgPos.y + 2.5f);
-                backPos = middleOrgPos;
-                moveSide = false;
-                //Debug.Log("You are at position");
-                canMoveUp = true;
-                canMoveDown = true;
-            }
-                
+            MoveLane(false);
+            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
+            MoveLaneTarget(lane, backFront);
         }
-        else if (lane == 0)
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            //Debug.Log("MOVE TO THE LEFT LANE");
-            transform.position = Vector2.MoveTowards(transform.position, leftLane.transform.position, speed * Time.deltaTime);
-            
-            if (Vector3.Distance(transform.position, leftLane.transform.position) <= 0)
-            {
-                frontPos = new Vector2(transform.position.x, orgPos.y + 2.5f);
-                backPos = leftOrgPos;
-                moveSide = false;
-                //Debug.Log("You are at position");
-                canMoveUp = true;
-                canMoveDown = true;
-            }
+            MoveLane(true);
+            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
+            MoveLaneTarget(lane, backFront);
         }
-        else if (lane == 2)
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //Debug.Log("MOVE TO THE RIGHT LANE");
-            transform.position = Vector2.MoveTowards(transform.position, rightLane.transform.position, speed * Time.deltaTime);
-            
-            if (Vector3.Distance(transform.position, rightLane.transform.position) <= 0)
-            {
-                frontPos = new Vector2(transform.position.x, orgPos.y + 2.5f);
-                backPos = rightOrgPos;
-                moveSide = false;
-                //Debug.Log("You are at position");
-                canMoveUp = true;
-                canMoveDown = true;
-            }
+            MoveFrontBack(true);
+            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
+            MoveLaneTarget(lane, backFront);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            MoveFrontBack(false);
+            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
+            MoveLaneTarget(lane, backFront);
         }
     }
 
@@ -145,48 +69,66 @@ public class PlayerMotorNew : MonoBehaviour
         lane += (goingRight) ? 1 : -1;
         // This clamps lane, so lowest number is 0, and highest is 2
         lane = Mathf.Clamp(lane, 0, 2);
-        moveSide = true;
     }
 
-    private void MoveUp()
+    private void MoveFrontBack(bool goingForward)
     {
-        // Make it so you can't move to the side when moving forward
-        canMoveSide = false;
-        transform.position = Vector2.MoveTowards(transform.position, frontPos, speed * Time.deltaTime);
+        backFront += (goingForward) ? 1 : -1;
+        backFront = Mathf.Clamp(backFront, 0, 1);
+    }
 
-        // Move the lane points to the forward position as well
-        leftLane.transform.position = newLeftPos;
-        middleLane.transform.position = newMiddlePos;
-        rightLane.transform.position = newRightPos;
-
-        // Check if player has reached forward position
-        if (Vector3.Distance(transform.position, frontPos) <= 0)
+    private void MoveLaneTarget(int tempLane, int tempBackFront)
+    {
+        if (tempBackFront == 0)
         {
-            canMoveSide = true; // Make player able to move to the sides again
-            canMoveUp = false; // Make player unable to move more forward
-            canMoveDown = true; // Make player able to move backwards
-            moveUp = false; // The player is no longer moving forward
+            if (tempLane == 0)
+            {
+                laneTarget.transform.position = leftLaneBack;
+            }
+            else if (tempLane == 1)
+            {
+                laneTarget.transform.position = middleLaneBack;
+            }
+            else if (tempLane == 2)
+            {
+                laneTarget.transform.position = rightLaneBack;
+            }
+        }
+        else if (tempBackFront == 1)
+        {
+            if (tempLane == 0)
+            {
+                laneTarget.transform.position = leftLaneFront;
+            }
+            else if (tempLane == 1)
+            {
+                laneTarget.transform.position = middleLaneFront;
+            }
+            else if (tempLane == 2)
+            {
+                laneTarget.transform.position = rightLaneFront;
+            }
         }
     }
 
-    private void MoveDown()
+    private void InitializeLanePos()
     {
-        // Make it so you can't move to the side when moving backward
-        canMoveSide = false;
-        transform.position = Vector2.MoveTowards(transform.position, backPos, speed * Time.deltaTime);
-
-        // Move the lane points to the original position as well
-        leftLane.transform.position = leftOrgPos;
-        middleLane.transform.position = middleOrgPos;
-        rightLane.transform.position = rightOrgPos;
-
-        // Check if player has reached original position again
-        if (Vector3.Distance(transform.position, backPos) <= 0)
-        {
-            canMoveSide = true; // Make player able to move to the sides again
-            canMoveUp = true; // Make player unableable to move forward
-            canMoveDown = false; // Make player unable to move more backwards
-            moveDown = false; // The player is no longer moving backward
-        }
+        // Middle lanes
+        Vector2 tempPos = laneTarget.transform.position;
+        middleLaneBack = tempPos;
+        tempPos.y = tempPos.y + FRONT_BACK_DISTANCE;
+        middleLaneFront = tempPos;
+        // Left lanes
+        tempPos = laneTarget.transform.position;
+        tempPos.x = tempPos.x - LANE_DISTANCE;
+        leftLaneBack = tempPos;
+        tempPos.y = tempPos.y + FRONT_BACK_DISTANCE;
+        leftLaneFront = tempPos;
+        // Right lanes
+        tempPos = laneTarget.transform.position;
+        tempPos.x = tempPos.x + LANE_DISTANCE;
+        rightLaneBack = tempPos;
+        tempPos.y = tempPos.y + FRONT_BACK_DISTANCE;
+        rightLaneFront = tempPos;
     }
 }

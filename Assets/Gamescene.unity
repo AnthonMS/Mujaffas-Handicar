@@ -303,8 +303,8 @@ GameObject:
   - component: {fileID: 455362171}
   - component: {fileID: 455362170}
   m_Layer: 0
-  m_Name: MiddleLaneTarget
-  m_TagString: MiddleLane
+  m_Name: LaneTarget
+  m_TagString: TargetPoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -331,46 +331,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1244403441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1244403443}
-  - component: {fileID: 1244403442}
-  m_Layer: 0
-  m_Name: LeftLaneTarget
-  m_TagString: LeftLane
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1244403442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1244403441}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ebb91f63a2db5840af57e93910f32d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1244403443
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1244403441}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1512026850
@@ -382,9 +342,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1512026853}
   - component: {fileID: 1512026852}
-  - component: {fileID: 1512026854}
-  - component: {fileID: 1512026855}
   - component: {fileID: 1512026851}
+  - component: {fileID: 1512026854}
   m_Layer: 0
   m_Name: TimmyWithWagon
   m_TagString: Player
@@ -400,11 +359,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1512026850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53077173c5ce9d447acb69e5e55bd5e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 63338c06d5ad5664190f8c5c7ebdab83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  forwardLength: 5
 --- !u!212 &1512026852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -462,24 +420,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!143 &1512026854
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1512026850}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 15
-  m_Radius: 3.07
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1512026855
+--- !u!114 &1512026854
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -487,51 +428,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1512026850}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63338c06d5ad5664190f8c5c7ebdab83, type: 3}
+  m_Script: {fileID: 11500000, guid: c284557e69dd7744ebe79156c6999a34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  forwardLength: 5
---- !u!1 &1567048655
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1567048657}
-  - component: {fileID: 1567048656}
-  m_Layer: 0
-  m_Name: RightLaneTarget
-  m_TagString: RightLane
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1567048656
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1567048655}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ebb91f63a2db5840af57e93910f32d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1567048657
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1567048655}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: -3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2137755628
 GameObject:
   m_ObjectHideFlags: 0
