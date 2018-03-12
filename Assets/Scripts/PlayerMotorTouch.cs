@@ -12,7 +12,7 @@ public class PlayerMotorTouch : MonoBehaviour
 
     // Used for moving the player
     public float speed = 5f;
-    private const float LANE_DISTANCE = 2f;
+    private const float LANE_DISTANCE = 1.85f;
     private const float FRONT_BACK_DISTANCE = 3f;
 
     private GameObject player;
@@ -21,6 +21,7 @@ public class PlayerMotorTouch : MonoBehaviour
     private Vector2 leftLaneBack, middleLaneBack, rightLaneBack, leftLaneFront, middleLaneFront, rightLaneFront;
     private int lane = 1; // 0 = Left, 1 = Middle, 2 = Right
     private int backFront = 0; // 0 = Back, 1 = Front
+    private Vector2 laneTargetPos;
 
     // Use this for initialization
     void Start ()
@@ -28,6 +29,7 @@ public class PlayerMotorTouch : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         laneTarget = GameObject.FindGameObjectWithTag("TargetPoint");
         InitializeLanePos();
+        laneTargetPos = middleLaneFront;
     }
 	
 	// Update is called once per frame
@@ -35,6 +37,7 @@ public class PlayerMotorTouch : MonoBehaviour
     {
         SwipeDetection();
         player.transform.position = Vector2.MoveTowards(player.transform.position, laneTarget.transform.position, speed * Time.deltaTime);
+        RotatePlayer(laneTargetPos);
     }
 
     private void SwipeDetection()
@@ -123,14 +126,17 @@ public class PlayerMotorTouch : MonoBehaviour
             if (tempLane == 0)
             {
                 laneTarget.transform.position = leftLaneBack;
+                laneTargetPos = leftLaneFront;
             }
             else if (tempLane == 1)
             {
                 laneTarget.transform.position = middleLaneBack;
+                laneTargetPos = middleLaneFront;
             }
             else if (tempLane == 2)
             {
                 laneTarget.transform.position = rightLaneBack;
+                laneTargetPos = rightLaneFront;
             }
         }
         else if (tempBackFront == 1)
@@ -138,16 +144,28 @@ public class PlayerMotorTouch : MonoBehaviour
             if (tempLane == 0)
             {
                 laneTarget.transform.position = leftLaneFront;
+                laneTargetPos = leftLaneFront;
             }
             else if (tempLane == 1)
             {
                 laneTarget.transform.position = middleLaneFront;
+                laneTargetPos = middleLaneFront;
             }
             else if (tempLane == 2)
             {
                 laneTarget.transform.position = rightLaneFront;
+                laneTargetPos = rightLaneFront;
             }
         }
+    }
+
+    private void RotatePlayer(Vector2 targetPos)
+    {
+        targetPos.y = targetPos.y + 5f;
+        Vector3 direction = ((Vector3)player.transform.position - (Vector3)targetPos);
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        player.transform.rotation = Quaternion.Slerp(player.transform.rotation, rotation, 5 * Time.deltaTime);
     }
 
     private void InitializeLanePos()

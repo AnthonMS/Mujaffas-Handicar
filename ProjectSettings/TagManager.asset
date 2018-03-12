@@ -8,6 +8,7 @@ TagManager:
   - MiddleLane
   - RightLane
   - TargetPoint
+  - PlayerPivot
   layers:
   - Default
   - TransparentFX
