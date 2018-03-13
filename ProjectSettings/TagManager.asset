@@ -8,7 +8,8 @@ TagManager:
   - MiddleLane
   - RightLane
   - TargetPoint
-  - PlayerPivot
+  - Car
+  - ObstacleSpawner
   layers:
   - Default
   - TransparentFX

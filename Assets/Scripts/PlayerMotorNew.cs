@@ -10,7 +10,6 @@ public class PlayerMotorNew : MonoBehaviour
     private const float FRONT_BACK_DISTANCE = 3f;
 
     private GameObject player;
-    private GameObject playerPivot;
     private GameObject laneTarget;
     // All the positions for the LaneTarget
     private Vector2 leftLaneBack, middleLaneBack, rightLaneBack, leftLaneFront, middleLaneFront, rightLaneFront;
@@ -22,10 +21,10 @@ public class PlayerMotorNew : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        playerPivot = GameObject.FindGameObjectWithTag("PlayerPivot");
         laneTarget = GameObject.FindGameObjectWithTag("TargetPoint");
         InitializeLanePos();
         laneTargetPos = middleLaneFront;
+        laneTargetPos.y = laneTargetPos.y + 3f;
         //Debug.Log("LeftLanes: " + leftLaneBack + ", " + leftLaneFront);
         //Debug.Log("MiddleLanes: " + middleLaneBack + ", " + middleLaneFront);
         //Debug.Log("RightLanes: " + rightLaneBack + ", " + rightLaneFront);
@@ -45,25 +44,21 @@ public class PlayerMotorNew : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             MoveLane(false);
-            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
             MoveLaneTarget(lane, backFront);
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             MoveLane(true);
-            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
             MoveLaneTarget(lane, backFront);
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             MoveFrontBack(true);
-            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
             MoveLaneTarget(lane, backFront);
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             MoveFrontBack(false);
-            Debug.Log("Lane: " + lane + ", FrontBack: " + backFront);
             MoveLaneTarget(lane, backFront);
         }
     }
@@ -90,16 +85,19 @@ public class PlayerMotorNew : MonoBehaviour
             {
                 laneTarget.transform.position = leftLaneBack;
                 laneTargetPos = leftLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 1)
             {
                 laneTarget.transform.position = middleLaneBack;
                 laneTargetPos = middleLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 2)
             {
                 laneTarget.transform.position = rightLaneBack;
                 laneTargetPos = rightLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
         }
         else if (tempBackFront == 1)
@@ -108,16 +106,19 @@ public class PlayerMotorNew : MonoBehaviour
             {
                 laneTarget.transform.position = leftLaneFront;
                 laneTargetPos = leftLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 1)
             {
                 laneTarget.transform.position = middleLaneFront;
                 laneTargetPos = middleLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 2)
             {
                 laneTarget.transform.position = rightLaneFront;
                 laneTargetPos = rightLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
         }
     }

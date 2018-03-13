@@ -30,6 +30,7 @@ public class PlayerMotorTouch : MonoBehaviour
         laneTarget = GameObject.FindGameObjectWithTag("TargetPoint");
         InitializeLanePos();
         laneTargetPos = middleLaneFront;
+        laneTargetPos.y = laneTargetPos.y + 3f;
     }
 	
 	// Update is called once per frame
@@ -127,16 +128,19 @@ public class PlayerMotorTouch : MonoBehaviour
             {
                 laneTarget.transform.position = leftLaneBack;
                 laneTargetPos = leftLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 1)
             {
                 laneTarget.transform.position = middleLaneBack;
                 laneTargetPos = middleLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 2)
             {
                 laneTarget.transform.position = rightLaneBack;
                 laneTargetPos = rightLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
         }
         else if (tempBackFront == 1)
@@ -145,16 +149,19 @@ public class PlayerMotorTouch : MonoBehaviour
             {
                 laneTarget.transform.position = leftLaneFront;
                 laneTargetPos = leftLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 1)
             {
                 laneTarget.transform.position = middleLaneFront;
                 laneTargetPos = middleLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
             else if (tempLane == 2)
             {
                 laneTarget.transform.position = rightLaneFront;
                 laneTargetPos = rightLaneFront;
+                laneTargetPos.y = laneTargetPos.y + 3f;
             }
         }
     }
