@@ -5,11 +5,18 @@ using UnityEngine;
 public class ColissionController : MonoBehaviour
 {
     //private GameObject player;
+    private GameObject audioObject;
+    private AudioSource audioSrc;
+    private AudioController audioCtrl;
 
 	// Use this for initialization
 	void Start ()
     {
         //player = GameObject.FindGameObjectWithTag("Player");
+        audioObject = GameObject.FindGameObjectWithTag("AudioManager");
+        audioSrc = audioObject.GetComponent<AudioSource>();
+        audioCtrl = audioObject.GetComponent<AudioController>();
+
 	}
 	
 	// Update is called once per frame
@@ -24,6 +31,11 @@ public class ColissionController : MonoBehaviour
         if (collision.gameObject.tag == "Car")
         {
             Debug.Log("You got hit by a car!");
+        }
+        else if (collision.gameObject.tag == "Kenny")
+        {
+            audioCtrl.PlayHeKilledKenny();
+            Destroy(collision.gameObject);
         }
     }
 }

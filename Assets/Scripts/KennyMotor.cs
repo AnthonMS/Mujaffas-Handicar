@@ -48,7 +48,7 @@ public class KennyMotor : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Player")
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 }
