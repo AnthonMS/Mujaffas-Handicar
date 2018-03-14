@@ -61,6 +61,10 @@ public class PlayerMotorNew : MonoBehaviour
             MoveFrontBack(false);
             MoveLaneTarget(lane, backFront);
         }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Tab detected");
+        }
     }
 
     private void MoveLane(bool goingRight)

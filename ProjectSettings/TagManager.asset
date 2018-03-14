@@ -10,6 +10,7 @@ TagManager:
   - TargetPoint
   - Car
   - ObstacleSpawner
+  - Kenny
   layers:
   - Default
   - TransparentFX

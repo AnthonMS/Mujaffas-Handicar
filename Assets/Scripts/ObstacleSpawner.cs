@@ -6,6 +6,8 @@ public class ObstacleSpawner : MonoBehaviour
 {
     private float lastTime;
     public float spawnEverySec = 4;
+    private float lastKenny;
+    public float spawnKennyEverySec = 14;
 
     //private float leftLane = -1.75f;
     //private float rightLane = 1.75f;
@@ -29,6 +31,11 @@ public class ObstacleSpawner : MonoBehaviour
             //Debug.Log(Time.time);
             lastTime = Time.time;
             WhichObstacle();
+        }
+        if (Time.time > lastKenny + spawnKennyEverySec)
+        {
+            SpawnKenny();
+            lastKenny = Time.time;
         }
     }
 
@@ -159,6 +166,27 @@ public class ObstacleSpawner : MonoBehaviour
         carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLaneRight);
         carInstance.transform.parent = transform;
+    }
+
+    private void SpawnKenny()
+    {
+        // Calculate if he spawns left or right
+        int randomInt = Random.Range(0, 101);
+        float tempFloat;
+        bool goLeft;
+        if (randomInt < 50) { tempFloat = 2f; goLeft = true; }
+        else { tempFloat = -8f; goLeft = false; }
+        // Calculate how far up he spawns and set the position
+        float randomFloat = Random.Range(-5, 4);
+        Vector2 tempPos = rightLane;
+        tempPos.x = tempPos.x + tempFloat;
+        tempPos.y = tempPos.y + randomFloat;
+        // Instantiate kenny
+        GameObject kennyInstance = Instantiate(Resources.Load("Kenny", typeof(GameObject))) as GameObject;
+        kennyInstance.transform.Translate(tempPos);
+        kennyInstance.transform.parent = transform;
+        // Call ChangeDir, so if goLeft is false, he will go left to right and Sprite is flipped
+        kennyInstance.SendMessage("ChangeDir", goLeft);
     }
 
     private Vector2 GetRandomLane()
