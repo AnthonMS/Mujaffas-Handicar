@@ -35,29 +35,37 @@ public class ObstacleSpawner : MonoBehaviour
     private void WhichObstacle()
     { // 1, 2, 4, 5, 6
         int randomInt = Random.Range(0, 101);
-        if (randomInt < 10) // If smaller than 10 - 10%
+        if (randomInt <= 10) // If smaller than 10 - 10%
             Obstacle4();
-        else if (randomInt < 20 && randomInt > 10) // if smaller than 20 and bigger than 10 - 10%
+        else if (randomInt <= 20 && randomInt > 10) // if smaller than 20 and bigger than 10 - 10%
             Obstacle6();
-        else if (randomInt < 40 && randomInt > 20) // if smaller than 35 and bigger than 20 - 20%
+        else if (randomInt <= 40 && randomInt > 20) // if smaller than 35 and bigger than 20 - 20%
             Obstacle5();
-        else if (randomInt < 60 && randomInt > 40) // if smaller than 50 and bigger than 35 - 20%
+        else if (randomInt <= 60 && randomInt > 40) // if smaller than 50 and bigger than 35 - 20%
             Obstacle2();
-        else if (randomInt < 70 && randomInt > 60) // if smaller than 60 and bigger than 50 - 10%
+        else if (randomInt <= 70 && randomInt > 60) // if smaller than 60 and bigger than 50 - 10%
             Obstacle7();
-        else if (randomInt < 80 && randomInt > 70) // if smaller than 70 and bigger than 60 - 10%
+        else if (randomInt <= 80 && randomInt > 70) // if smaller than 70 and bigger than 60 - 10%
             Obstacle6();
-        else if (randomInt < 100 && randomInt > 80) // if smaller than 100 and bigger than 70 - 20%
+        else if (randomInt <= 100 && randomInt > 80) // if smaller than 100 and bigger than 70 - 20%
             Obstacle1();
+        else
+            Debug.Log("No Obstacle was spawned! " + randomInt);
         
     }
     // Random lane, Blue car
     private void Obstacle1()
     {
+        Vector2 templane = GetRandomLane();
         GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
-        carInstance.transform.Translate(GetRandomLane());
+        carInstance.transform.Translate(templane);
         carInstance.transform.parent = transform;
-        ExtraObstacle();
+        //ExtraObstacle();
+        if (ExtraObstacle() == false)
+        {
+            //Debug.Log("Extra Obstacle returned as false");
+            ExtraDoubleObstacle();
+        }
     }
     // Random lane, Chefs car
     private void Obstacle2()
@@ -65,7 +73,12 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Chefs_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(GetRandomLane());
         carInstance.transform.parent = transform;
-        ExtraObstacle();
+        //ExtraObstacle();
+        if (ExtraObstacle() == false)
+        {
+            //Debug.Log("Extra Obstacle returned as false");
+            ExtraDoubleObstacle();
+        }
     }
     // Left & Right lane, Chefs car & Blue car
     private void Obstacle4()
@@ -83,15 +96,27 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("School_bus", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(GetRandomLane());
         carInstance.transform.parent = transform;
-        ExtraObstacle();
+        //ExtraObstacle();
+        if (ExtraObstacle() == false)
+        {
+            //Debug.Log("Extra Obstacle returned as false");
+            ExtraDoubleObstacle();
+        }
     }
     // Random lane, Cop car
     private void Obstacle6()
     {
+        Vector2 tempLane = GetRandomLane();
+        tempLane.y = tempLane.y + 2f;
         GameObject carInstance = Instantiate(Resources.Load("Cop_car", typeof(GameObject))) as GameObject;
-        carInstance.transform.Translate(GetRandomLane());
+        carInstance.transform.Translate(tempLane);
         carInstance.transform.parent = transform;
-        ExtraObstacle();
+        //ExtraObstacle();
+        if (ExtraObstacle() == false)
+        {
+            //Debug.Log("Extra Obstacle returned as false");
+            ExtraDoubleObstacle();
+        }
     }
     //Left lane & Middle lane, Cop car & Bus
     private void Obstacle7()
@@ -104,17 +129,36 @@ public class ObstacleSpawner : MonoBehaviour
         carInstance.transform.parent = transform;
     }
     // Random lane, right behind other car, blue car
-    private void ExtraObstacle()
+    private bool ExtraObstacle()
     {
         int randomInt = Random.Range(0, 101); // Random Int from 0-100
-        if (randomInt < 75)
+        if (randomInt < 60)
         {
             Vector2 tempLane = GetRandomLane();
             tempLane.y = tempLane.y + 3.5f;
             GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
             carInstance.transform.Translate(tempLane);
             carInstance.transform.parent = transform;
+            return true;
         }
+        else
+        {
+            return false;
+        }
+    }
+    // Left & Right lane, right behind car in middle lane.
+    private void ExtraDoubleObstacle()
+    {
+        Vector2 tempLaneLeft = leftLane;
+        tempLaneLeft.y = tempLaneLeft.y + 6f;
+        Vector2 tempLaneRight = rightLane;
+        tempLaneRight.y = tempLaneRight.y + 6f;
+        GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
+        carInstance.transform.Translate(tempLaneLeft);
+        carInstance.transform.parent = transform;
+        carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
+        carInstance.transform.Translate(tempLaneRight);
+        carInstance.transform.parent = transform;
     }
 
     private Vector2 GetRandomLane()
