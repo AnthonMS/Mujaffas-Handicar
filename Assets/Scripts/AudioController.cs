@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
-
     public AudioClip heKilledKenny;
+    public AudioClip splat;
     private AudioSource audioSrc;
 
     // Use this for initialization
@@ -24,5 +24,11 @@ public class AudioController : MonoBehaviour
     {
         //Debug.Log("Play he killed kenny sounds!!");
         audioSrc.PlayOneShot(heKilledKenny);
+    }
+
+    public void PlaySplat()
+    {
+        audioSrc.PlayOneShot(splat);
+        Invoke("PlayHeKilledKenny", 0.2f);
     }
 }

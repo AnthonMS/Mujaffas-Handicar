@@ -14,7 +14,7 @@ public class ColissionController : MonoBehaviour
     {
         //player = GameObject.FindGameObjectWithTag("Player");
         audioObject = GameObject.FindGameObjectWithTag("AudioManager");
-        audioSrc = audioObject.GetComponent<AudioSource>();
+        //audioSrc = audioObject.GetComponent<AudioSource>();
         audioCtrl = audioObject.GetComponent<AudioController>();
 
 	}
@@ -34,7 +34,7 @@ public class ColissionController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Kenny")
         {
-            audioCtrl.PlayHeKilledKenny();
+            audioCtrl.PlaySplat(); // This plays a splat sound that also calls HeKilledKenny sound 0.2 seconds after
             Destroy(collision.gameObject);
         }
     }
