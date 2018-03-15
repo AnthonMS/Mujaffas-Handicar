@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class KennyMotor : MonoBehaviour
 {
-
+    public float damage = 10f;
+    public float retractScore = 10f;
     public float followBgSpeed = 2f;
     public float crossingSpeed = 1f;
     private bool goLeft = true;

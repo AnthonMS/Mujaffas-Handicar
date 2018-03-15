@@ -90,6 +90,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3.5
+  retractScore: 5
+  damage: 20
 --- !u!212 &212359879678013430
 SpriteRenderer:
   m_ObjectHideFlags: 1

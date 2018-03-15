@@ -5,6 +5,8 @@ using UnityEngine;
 public class CarMotor : MonoBehaviour
 {
     public float speed = 3.5f;
+    public float retractScore = 5f;
+    public float damage = 10f;
     //private GameObject car;
     private float verticalHeight;
     //private GameObject spawner;

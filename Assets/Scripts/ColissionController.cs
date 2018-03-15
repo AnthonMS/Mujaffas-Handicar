@@ -30,12 +30,16 @@ public class ColissionController : MonoBehaviour
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Car")
         {
-            Debug.Log("You got hit by a car!");
+            //Debug.Log("You got hit by a car!");
+            float damage = collision.gameObject.GetComponent<CarMotor>().damage;
+            gameObject.SendMessage("TakeDamage", damage);
         }
         else if (collision.gameObject.tag == "Kenny")
         {
             audioCtrl.PlaySplat(); // This plays a splat sound that also calls HeKilledKenny sound 0.2 seconds after
             Destroy(collision.gameObject);
+            float damage = collision.gameObject.GetComponent<KennyMotor>().damage;
+            gameObject.SendMessage("TakeDamage", damage);
         }
     }
 }
