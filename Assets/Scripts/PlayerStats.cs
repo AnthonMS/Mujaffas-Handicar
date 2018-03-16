@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
-    private float maxHealth = 100;
+    [Header("Stats")]
     public float health = 100;
     public float score = 0;
-    private float minScore = 0;
-    public Slider healthBar;
 
-	// Use this for initialization
-	void Start ()
+    [Header("Unity Stuff")]
+    public Image healthBar;
+
+    // Private stuff
+    private float maxHealth = 100;
+    private float minScore = 0;
+
+    // Use this for initialization
+    void Start ()
     {
-        healthBar.value = CalculateHealth();
+        // hello world
+        healthBar.fillAmount = CalculateHealth();
 	}
 	
 	// Update is called once per frame
@@ -26,7 +32,9 @@ public class PlayerStats : MonoBehaviour
     public void TakeDamage(float damage)
     {
         this.health -= damage;
-        healthBar.value = CalculateHealth();
+        if (this.health <= 0)
+            this.health = 0;
+        healthBar.fillAmount = CalculateHealth();
         Debug.Log("You took " + damage + " damage, you have " + health + " left");
     }
 
