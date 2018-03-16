@@ -9,12 +9,14 @@ public class PlayerStats : MonoBehaviour
     public float health = 100;
     public float score = 0;
 
-    [Header("Unity Stuff")]
+    [Header("Canvas Stuff")]
     public Image healthBar;
+    public Canvas canvas;
 
     // Private stuff
     private float maxHealth = 100;
     private float minScore = 0;
+    private float scoreIncreaseSpeed = 10;
 
     // Use this for initialization
     void Start ()
@@ -26,7 +28,8 @@ public class PlayerStats : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
-		
+        CalculateScore();
+        
 	}
 
     public void TakeDamage(float damage)
@@ -35,7 +38,7 @@ public class PlayerStats : MonoBehaviour
         if (this.health <= 0)
             this.health = 0;
         healthBar.fillAmount = CalculateHealth();
-        Debug.Log("You took " + damage + " damage, you have " + health + " left");
+        //Debug.Log("You took " + damage + " damage, you have " + health + " left");
     }
 
     public void AddScore(float score)
@@ -53,5 +56,12 @@ public class PlayerStats : MonoBehaviour
     private float CalculateHealth()
     {
         return this.health / this.maxHealth;
+    }
+
+    private void CalculateScore()
+    {
+        float tempScore = score + scoreIncreaseSpeed * Time.deltaTime;
+        score = tempScore;
+        canvas.SendMessage("SetScoreText", score.ToString("0"));
     }
 }

@@ -3,19 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ButtonManager : MonoBehaviour
+public class CanvasManager : MonoBehaviour
 {
     private int muteTier = 0;
     private GameObject audioMan;
     private AudioSource effectsSrc; // AudioSource 0
     private AudioSource motorSrc; // AudioSource 1
     private AudioSource musicSrc; // AudioSource 2
+    private GameObject player;
 
     [Header("Button Stuff")]
     public Button muteBtn;
     public Sprite speakerFullIcon;
     public Sprite speakerLowIcon;
     public Sprite speakerMuteIcon;
+
+    [Header("Score Stuff")]
+    public Text scoreText;
 
     // Use this for initialization
     void Start ()
@@ -25,24 +29,20 @@ public class ButtonManager : MonoBehaviour
         effectsSrc = audioMan.GetComponents<AudioSource>()[0];
         motorSrc = audioMan.GetComponents<AudioSource>()[1];
         musicSrc = audioMan.GetComponents<AudioSource>()[2];
+        player = GameObject.FindGameObjectWithTag("Player");
 
-        if (PlayerPrefs.HasKey("MuteTier"))
-        {
-            //Debug.Log("Playerprefs HAS key MuteTier");
-            muteTier = PlayerPrefs.GetInt("MuteTier");
-            MuteOrUnmute();
-            
-        }
-        else
-        {
-            //Debug.Log("Playerprefs HAS NO key MuteTier");
-        }
+        InitMuteSettings();
 	}
 
     // Update is called once per frame
 	void Update ()
     {
 
+    }
+
+    public void SetScoreText(string text)
+    {
+        scoreText.text = text;
     }
 
     public void MuteOrUnmute()
@@ -78,6 +78,21 @@ public class ButtonManager : MonoBehaviour
             muteTier = 0;
             // Save the players settings for mute
             PlayerPrefs.SetInt("MuteTier", 2);
+        }
+    }
+
+    private void InitMuteSettings()
+    {
+        if (PlayerPrefs.HasKey("MuteTier"))
+        {
+            //Debug.Log("Playerprefs HAS key MuteTier");
+            muteTier = PlayerPrefs.GetInt("MuteTier");
+            MuteOrUnmute();
+
+        }
+        else
+        {
+            //Debug.Log("Playerprefs HAS NO key MuteTier");
         }
     }
 }

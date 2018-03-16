@@ -33,6 +33,7 @@ public class ColissionController : MonoBehaviour
             //Debug.Log("You got hit by a car!");
             float damage = collision.gameObject.GetComponent<CarMotor>().damage;
             gameObject.SendMessage("TakeDamage", damage);
+            gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<CarMotor>().retractScore);
         }
         else if (collision.gameObject.tag == "Kenny")
         {
@@ -40,6 +41,7 @@ public class ColissionController : MonoBehaviour
             Destroy(collision.gameObject);
             float damage = collision.gameObject.GetComponent<KennyMotor>().damage;
             gameObject.SendMessage("TakeDamage", damage);
+            gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<KennyMotor>().retractScore);
         }
     }
 }
