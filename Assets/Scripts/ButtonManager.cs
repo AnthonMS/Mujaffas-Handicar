@@ -25,6 +25,18 @@ public class ButtonManager : MonoBehaviour
         effectsSrc = audioMan.GetComponents<AudioSource>()[0];
         motorSrc = audioMan.GetComponents<AudioSource>()[1];
         musicSrc = audioMan.GetComponents<AudioSource>()[2];
+
+        if (PlayerPrefs.HasKey("MuteTier"))
+        {
+            //Debug.Log("Playerprefs HAS key MuteTier");
+            muteTier = PlayerPrefs.GetInt("MuteTier");
+            MuteOrUnmute();
+            
+        }
+        else
+        {
+            //Debug.Log("Playerprefs HAS NO key MuteTier");
+        }
 	}
 
     // Update is called once per frame
@@ -35,33 +47,37 @@ public class ButtonManager : MonoBehaviour
 
     public void MuteOrUnmute()
     {
-        //Debug.Log("Mute or Unmute audio");
+        //Debug.Log("Mute clicked!! " + muteTier);
         if (muteTier == 0)
         {
-            Debug.Log("Mute Music!");
             musicSrc.mute = true;
             //musicSrc.Stop();
             muteBtn.GetComponent<Image>().sprite = speakerLowIcon;
             muteTier = 1;
+            // Save the players settings for mute
+            PlayerPrefs.SetInt("MuteTier", 0);
+
         }
         else if (muteTier == 1)
         {
-            Debug.Log("Mute Music AND effects");
             musicSrc.mute = true;
             motorSrc.mute = true;
             effectsSrc.mute = true;
             muteBtn.GetComponent<Image>().sprite = speakerMuteIcon;
             muteTier = 2;
+            // Save the players settings for mute
+            PlayerPrefs.SetInt("MuteTier", 1);
         }
         else if (muteTier == 2)
         {
-            Debug.Log("Unmute Music AND effects");
             musicSrc.mute = false;
             //musicSrc.Play();
             motorSrc.mute = false;
             effectsSrc.mute = false;
             muteBtn.GetComponent<Image>().sprite = speakerFullIcon;
             muteTier = 0;
+            // Save the players settings for mute
+            PlayerPrefs.SetInt("MuteTier", 2);
         }
     }
 }

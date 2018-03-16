@@ -12,6 +12,7 @@ TagManager:
   - ObstacleSpawner
   - Kenny
   - AudioManager
+  - MuteBtn
   layers:
   - Default
   - TransparentFX
