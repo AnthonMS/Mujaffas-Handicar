@@ -8,6 +8,8 @@ public class ObstacleSpawner : MonoBehaviour
     public float spawnEverySec = 4;
     private float lastKenny;
     public float spawnKennyEverySec = 14;
+    public bool firstSpawn = true;
+    public bool restartedGame;
 
     //private float leftLane = -1.75f;
     //private float rightLane = 1.75f;
@@ -20,14 +22,19 @@ public class ObstacleSpawner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        //Obstacle1(); // This is commented out because when restarting it sometimes started with 4 different obstacles and impossible to dodge
+        // This checks if the time is lower than 1, if true, 
+        // the game has just been started and an obstacle needs to be spawned right away, if false,
+        // the game has been restarted after death and the update will spawn Obstacles because time is larger than last spawn
+        if (Time.time < 1f)
+            Obstacle1();
     }
 	
 	// Update is called once per frame
 	void Update ()
     {
-		if (Time.time > lastTime + spawnEverySec)
+        if (Time.time > lastTime + spawnEverySec)
         {
+            Debug.Log("Spawn obstacle");
             //Debug.Log(Time.time);
             lastTime = Time.time;
             WhichObstacle();

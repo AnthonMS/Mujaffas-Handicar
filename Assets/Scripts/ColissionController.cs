@@ -30,7 +30,7 @@ public class ColissionController : MonoBehaviour
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Car")
         {
-            //Debug.Log("You got hit by a car!");
+            audioCtrl.PlayCrash();
             float damage = collision.gameObject.GetComponent<CarMotor>().damage;
             gameObject.SendMessage("TakeDamage", damage);
             gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<CarMotor>().retractScore);

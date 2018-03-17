@@ -25,8 +25,7 @@ public class PlayerStats : MonoBehaviour
         healthBar.fillAmount = CalculateHealth();
 
         CheckHighscore();
-        
-	}
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -41,6 +40,7 @@ public class PlayerStats : MonoBehaviour
         if (this.health <= 0)
         {
             this.health = 0;
+            
 
             // Call this method with Invoke, because if we call it right away, it shows the wrong score in the EndGame menu
             Invoke("SendEndGameMessage", 0.05f);
@@ -51,6 +51,7 @@ public class PlayerStats : MonoBehaviour
 
     private void SendEndGameMessage()
     {
+        SetHighscore(); // Set the highscore here, else the wrong highscore is displayed if it was beaten.
         GameObject.FindGameObjectWithTag("PauseController").SendMessage("EndGame");
     }
 
@@ -71,7 +72,10 @@ public class PlayerStats : MonoBehaviour
         float tempScore = score + scoreIncreaseSpeed * Time.deltaTime;
         score = tempScore;
         canvas.SendMessage("SetScoreText", score.ToString("0"));
+    }
 
+    public void SetHighscore()
+    {
         if (score > highScore)
         {
             highScore = score;

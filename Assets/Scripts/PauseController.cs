@@ -14,9 +14,20 @@ public class PauseController : MonoBehaviour
     public Text deadScoreText;
     public Text deadHighscoreText;
 
-	// Use this for initialization
-	void Start ()
+    private GameObject audioMan;
+    //private AudioSource effectsSrc; // AudioSource 0
+    private AudioSource motorSrc; // AudioSource 1
+    //private AudioSource musicSrc; // AudioSource 2
+
+    // Use this for initialization
+    void Start ()
     {
+        audioMan = GameObject.FindGameObjectWithTag("AudioManager");
+        //effectsSrc = audioMan.GetComponents<AudioSource>()[0];
+        motorSrc = audioMan.GetComponents<AudioSource>()[1];
+        //musicSrc = audioMan.GetComponents<AudioSource>()[2];
+        motorSrc.mute = true;
+
         //endGameCanvas.enabled = false;
         endGamePanel.SetActive(false);
         if (isPaused)
@@ -41,6 +52,7 @@ public class PauseController : MonoBehaviour
         {
             Time.timeScale = 1;
             GameObject.FindGameObjectWithTag("TabToPlay").SetActive(false);
+            motorSrc.mute = false;
         }  
         else
         {
@@ -57,6 +69,7 @@ public class PauseController : MonoBehaviour
         deadScoreText.text = "Your score: " + tempscore.ToString("0");
         float temphighscore = PlayerPrefs.GetFloat("Highscore");
         deadHighscoreText.text = "Highscore: " + temphighscore.ToString("0");
+        motorSrc.mute = true;
         Time.timeScale = 0;
     }
 
@@ -64,6 +77,8 @@ public class PauseController : MonoBehaviour
     {
         Debug.Log("Restart game!");
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().firstSpawn = false;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().restartedGame = true;
     }
 
     private void SetDeadScoreText()
