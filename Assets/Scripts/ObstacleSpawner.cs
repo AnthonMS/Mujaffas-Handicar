@@ -34,13 +34,13 @@ public class ObstacleSpawner : MonoBehaviour
     {
         if (Time.time > lastTime + spawnEverySec)
         {
-            Debug.Log("Spawn obstacle");
-            //Debug.Log(Time.time);
+            // Spawn Obstacle
             lastTime = Time.time;
             WhichObstacle();
         }
         if (Time.time > lastKenny + spawnKennyEverySec)
         {
+            // Spawn Kenny
             SpawnKenny();
             lastKenny = Time.time;
         }

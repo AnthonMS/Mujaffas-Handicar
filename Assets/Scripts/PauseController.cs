@@ -34,6 +34,9 @@ public class PauseController : MonoBehaviour
             Time.timeScale = 0;
         else
             Time.timeScale = 1;
+
+        if (Time.time > 1)
+            TabToStart();
 	}
 	
 	// Update is called once per frame
