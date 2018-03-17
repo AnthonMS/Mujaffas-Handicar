@@ -8,6 +8,7 @@ public class PlayerStats : MonoBehaviour
     [Header("Stats")]
     public float health = 100;
     public float score = 0;
+    public float highScore;
 
     [Header("Canvas Stuff")]
     public Image healthBar;
@@ -15,7 +16,6 @@ public class PlayerStats : MonoBehaviour
 
     // Private stuff
     private float maxHealth = 100;
-    private float minScore = 0;
     private float scoreIncreaseSpeed = 10;
 
     // Use this for initialization
@@ -23,6 +23,9 @@ public class PlayerStats : MonoBehaviour
     {
         // hello world
         healthBar.fillAmount = CalculateHealth();
+
+        CheckHighscore();
+        
 	}
 	
 	// Update is called once per frame
@@ -36,14 +39,19 @@ public class PlayerStats : MonoBehaviour
     {
         this.health -= damage;
         if (this.health <= 0)
+        {
             this.health = 0;
+
+            // Call this method with Invoke, because if we call it right away, it shows the wrong score in the EndGame menu
+            Invoke("SendEndGameMessage", 0.05f);
+        }
         healthBar.fillAmount = CalculateHealth();
         //Debug.Log("You took " + damage + " damage, you have " + health + " left");
     }
 
-    public void AddScore(float score)
+    private void SendEndGameMessage()
     {
-        this.score += score;
+        GameObject.FindGameObjectWithTag("PauseController").SendMessage("EndGame");
     }
 
     public void RetractScore(float score)
@@ -63,5 +71,18 @@ public class PlayerStats : MonoBehaviour
         float tempScore = score + scoreIncreaseSpeed * Time.deltaTime;
         score = tempScore;
         canvas.SendMessage("SetScoreText", score.ToString("0"));
+
+        if (score > highScore)
+        {
+            highScore = score;
+            //Debug.Log("Highscore beat! New = " + highScore);
+            PlayerPrefs.SetFloat("Highscore", highScore);
+        }
+    }
+
+    private void CheckHighscore()
+    {
+        if (PlayerPrefs.HasKey("Highscore"))
+            highScore = PlayerPrefs.GetFloat("Highscore");
     }
 }

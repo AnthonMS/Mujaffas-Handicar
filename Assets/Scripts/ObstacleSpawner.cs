@@ -20,7 +20,7 @@ public class ObstacleSpawner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        Obstacle1();
+        //Obstacle1(); // This is commented out because when restarting it sometimes started with 4 different obstacles and impossible to dodge
     }
 	
 	// Update is called once per frame
@@ -73,6 +73,7 @@ public class ObstacleSpawner : MonoBehaviour
             //Debug.Log("Extra Obstacle returned as false");
             ExtraDoubleObstacle();
         }
+        //Debug.Log("Spawned Obstacle1");
     }
     // Random lane, Chefs car
     private void Obstacle2()
@@ -86,6 +87,7 @@ public class ObstacleSpawner : MonoBehaviour
             //Debug.Log("Extra Obstacle returned as false");
             ExtraDoubleObstacle();
         }
+        //Debug.Log("Spawned Obstacle2");
     }
     // Left & Right lane, Chefs car & Blue car
     private void Obstacle4()
@@ -96,6 +98,8 @@ public class ObstacleSpawner : MonoBehaviour
         carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(rightLane);
         carInstance.transform.parent = transform;
+
+        //Debug.Log("Spawned Obstacle4");
     }
     // Random lane, School bus
     private void Obstacle5()
@@ -109,6 +113,7 @@ public class ObstacleSpawner : MonoBehaviour
             //Debug.Log("Extra Obstacle returned as false");
             ExtraDoubleObstacle();
         }
+        //Debug.Log("Spawned Obstacle5");
     }
     // Random lane, Cop car
     private void Obstacle6()
@@ -124,6 +129,7 @@ public class ObstacleSpawner : MonoBehaviour
             //Debug.Log("Extra Obstacle returned as false");
             ExtraDoubleObstacle();
         }
+        //Debug.Log("Spawned Obstacle6");
     }
     //Left lane & Middle lane, Cop car & Bus
     private void Obstacle7()
@@ -134,6 +140,7 @@ public class ObstacleSpawner : MonoBehaviour
         carInstance = Instantiate(Resources.Load("School_bus", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(middleLane);
         carInstance.transform.parent = transform;
+        //Debug.Log("Spawned Obstacle7");
     }
     // Random lane, right behind other car, blue car
     private bool ExtraObstacle()
@@ -146,6 +153,7 @@ public class ObstacleSpawner : MonoBehaviour
             GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
             carInstance.transform.Translate(tempLane);
             carInstance.transform.parent = transform;
+            //Debug.Log("Spawned ExtraObstacle");
             return true;
         }
         else
@@ -166,6 +174,7 @@ public class ObstacleSpawner : MonoBehaviour
         carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLaneRight);
         carInstance.transform.parent = transform;
+        //Debug.Log("Spawned ExtraDoubleObstacle");
     }
 
     private void SpawnKenny()

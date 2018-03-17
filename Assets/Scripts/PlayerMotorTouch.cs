@@ -101,6 +101,11 @@ public class PlayerMotorTouch : MonoBehaviour
                 else
                 {   //It's a tap as the drag distance is less than 20% of the screen height
                     Debug.Log("Tap");
+                    PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
+                    if (pauseController.gameEnded == false)
+                    {
+                        pauseController.TabToStart();
+                    }
                 }
             }
         }

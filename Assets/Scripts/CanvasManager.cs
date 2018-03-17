@@ -10,7 +10,7 @@ public class CanvasManager : MonoBehaviour
     private AudioSource effectsSrc; // AudioSource 0
     private AudioSource motorSrc; // AudioSource 1
     private AudioSource musicSrc; // AudioSource 2
-    private GameObject player;
+    //private GameObject player;
 
     [Header("Button Stuff")]
     public Button muteBtn;
@@ -29,7 +29,7 @@ public class CanvasManager : MonoBehaviour
         effectsSrc = audioMan.GetComponents<AudioSource>()[0];
         motorSrc = audioMan.GetComponents<AudioSource>()[1];
         musicSrc = audioMan.GetComponents<AudioSource>()[2];
-        player = GameObject.FindGameObjectWithTag("Player");
+        //player = GameObject.FindGameObjectWithTag("Player");
 
         InitMuteSettings();
 	}

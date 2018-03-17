@@ -63,7 +63,7 @@ public class PlayerMotorNew : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log("Tab detected");
+            //Debug.Log("Tab detected");
         }
     }
 
