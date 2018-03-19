@@ -15,6 +15,9 @@ TagManager:
   - MuteBtn
   - PauseController
   - TabToPlay
+  - HUDcanvas
+  - Road
+  - Road1
   layers:
   - Default
   - TransparentFX

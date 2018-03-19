@@ -9,6 +9,8 @@ public class PlayerStats : MonoBehaviour
     public float health = 100;
     public float score = 0;
     public float highScore;
+    public float tier = 0;
+    public float tierIncrease = 100;
 
     [Header("Canvas Stuff")]
     public Image healthBar;
@@ -17,6 +19,8 @@ public class PlayerStats : MonoBehaviour
     // Private stuff
     private float maxHealth = 100;
     private float scoreIncreaseSpeed = 10;
+    private float lastTier;
+    private float lastTierIncrease;
 
     // Use this for initialization
     void Start ()
@@ -72,6 +76,13 @@ public class PlayerStats : MonoBehaviour
         float tempScore = score + scoreIncreaseSpeed * Time.deltaTime;
         score = tempScore;
         canvas.SendMessage("SetScoreText", score.ToString("0"));
+
+        // Max tier is 10, only increase if lower than max tier
+        if (tier < 10)
+        {
+            if (score > lastTierIncrease + tierIncrease)
+                IncreaseTier();
+        }
     }
 
     public void SetHighscore()
@@ -88,5 +99,24 @@ public class PlayerStats : MonoBehaviour
     {
         if (PlayerPrefs.HasKey("Highscore"))
             highScore = PlayerPrefs.GetFloat("Highscore");
+    }
+
+    private void IncreaseTier()
+    {
+        //Debug.Log("Tier increased!");
+        lastTierIncrease = score;
+        tier++;
+
+        scoreIncreaseSpeed += 5;
+
+        GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed += 0.5f;
+        GameObject.FindGameObjectWithTag("Road1").GetComponent<BackgroundManager>().speed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().blueCarSpeed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().chefsCarSpeed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().copCarSpeed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().busSpeed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().kennyFollowBgSpeed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnEverySec -= 0.3f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnKennyEverySec -= 0.3f;
     }
 }

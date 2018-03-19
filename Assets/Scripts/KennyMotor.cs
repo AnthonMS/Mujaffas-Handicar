@@ -13,7 +13,8 @@ public class KennyMotor : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-		
+        // This will just destroy Kenny if he lives longer than 10 seconds. (He will be long gone by then)
+        Destroy(gameObject, 15f);
 	}
 	
 	// Update is called once per frame

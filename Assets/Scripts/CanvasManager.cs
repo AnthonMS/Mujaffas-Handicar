@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-    private int muteTier = 0;
+    public int muteTier = 0;
     private GameObject audioMan;
     private AudioSource effectsSrc; // AudioSource 0
     private AudioSource motorSrc; // AudioSource 1

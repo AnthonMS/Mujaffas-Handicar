@@ -18,6 +18,8 @@ public class PauseController : MonoBehaviour
     //private AudioSource effectsSrc; // AudioSource 0
     private AudioSource motorSrc; // AudioSource 1
     //private AudioSource musicSrc; // AudioSource 2
+    private CanvasManager canvasMngr;
+    private bool muteMotor;
 
     // Use this for initialization
     void Start ()
@@ -26,7 +28,14 @@ public class PauseController : MonoBehaviour
         //effectsSrc = audioMan.GetComponents<AudioSource>()[0];
         motorSrc = audioMan.GetComponents<AudioSource>()[1];
         //musicSrc = audioMan.GetComponents<AudioSource>()[2];
-        motorSrc.mute = true;
+        canvasMngr = GameObject.FindGameObjectWithTag("HUDcanvas").GetComponent<CanvasManager>();
+        if (canvasMngr.muteTier == 0)
+            muteMotor = false;
+        else if (canvasMngr.muteTier == 1)
+            muteMotor = false;
+        else if (canvasMngr.muteTier == 2)
+            muteMotor = true;
+        motorSrc.mute = muteMotor;
 
         //endGameCanvas.enabled = false;
         endGamePanel.SetActive(false);
@@ -46,6 +55,17 @@ public class PauseController : MonoBehaviour
         {
             TabToStart();
         }
+
+        // Check if the motor is muted or not. But only check when the game is paused. So it is not always called
+        if (isPaused)
+        {
+            if (canvasMngr.muteTier == 0)
+                muteMotor = false;
+            else if (canvasMngr.muteTier == 1)
+                muteMotor = false;
+            else if (canvasMngr.muteTier == 2)
+                muteMotor = true;
+        }
 	}
 
     public void TabToStart()
@@ -55,7 +75,7 @@ public class PauseController : MonoBehaviour
         {
             Time.timeScale = 1;
             GameObject.FindGameObjectWithTag("TabToPlay").SetActive(false);
-            motorSrc.mute = false;
+            motorSrc.mute = muteMotor;
         }  
         else
         {
