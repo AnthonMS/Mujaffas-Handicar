@@ -443,6 +443,34 @@ MonoBehaviour:
   heKilledKenny: {fileID: 8300000, guid: 9ebd8b563d3359f499ad311cfea1b650, type: 3}
   splat: {fileID: 8300000, guid: c16313e946a6d6244a86e2245428d344, type: 3}
   crash: {fileID: 8300000, guid: 04c188efa85fcdc46bc95493ea402918, type: 3}
+  greetJimmy: {fileID: 8300000, guid: 02a295a1c0ebfab41913456ba795118e, type: 3}
+  ahh_Timmy_retarded: {fileID: 8300000, guid: 1becf7daa69898a4ba11da6814e8e3e9, type: 3}
+  hua: {fileID: 8300000, guid: 98754ca333c998e40b7f8a91a1d59260, type: 3}
+  hua_2: {fileID: 8300000, guid: ce0d4989c986f41448181d25775174ab, type: 3}
+  hua_3: {fileID: 8300000, guid: e0e85ffd97e1bd84ab76973244bf2bd3, type: 3}
+  hua_4: {fileID: 8300000, guid: 16cdc624d18b56e428520d27b19fc5e8, type: 3}
+  hua_5: {fileID: 8300000, guid: cf25fd306f74e224084cc95f744e7386, type: 3}
+  luAla_Timmy: {fileID: 8300000, guid: 34940da5d193d75409e4a1d448750cbc, type: 3}
+  luAla_Timmy_2: {fileID: 8300000, guid: db2bb91f7de1d3748836d9b64a3f655c, type: 3}
+  tim_Timmy: {fileID: 8300000, guid: e87b3b2a125108042ba92fe1b27b8ae8, type: 3}
+  tim_Timmy_2: {fileID: 8300000, guid: 830f8c323abc17a439d97b8747137dd0, type: 3}
+  tim_Timmy_3: {fileID: 8300000, guid: 3a5186ff25b1e994b8e140a99354fd82, type: 3}
+  timmy_Scream: {fileID: 8300000, guid: 2c015390c66252e49b193e3a33b8c3f0, type: 3}
+  timmy_Shit: {fileID: 8300000, guid: 39092f41046b84b43b941c9dc79568b7, type: 3}
+  timmy_timmy: {fileID: 8300000, guid: 6eeef2602787f65429ecb6484dd7d8be, type: 3}
+  timmy: {fileID: 8300000, guid: 436627c444500764ba79d43f26c82fc8, type: 3}
+  timmy_2: {fileID: 8300000, guid: bc3c842a84dde8c4e9ec8d649277babc, type: 3}
+  timmy_3: {fileID: 8300000, guid: bb6e112b60f3d6f4eb9ad1346d12fe98, type: 3}
+  timmy_4: {fileID: 8300000, guid: e73e30d884736374aa974ab421c48fb9, type: 3}
+  timmy_5: {fileID: 8300000, guid: e5bd62d1110c7734f988ca2b64b92da0, type: 3}
+  timmy_6: {fileID: 8300000, guid: 6519af55ea6da7b46bfd121dc57d2400, type: 3}
+  timmy_7: {fileID: 8300000, guid: 378ebc7326399564fb23a71a2026cad6, type: 3}
+  timmy_8: {fileID: 8300000, guid: 8120ef333b7750e42963d572033bfb2a, type: 3}
+  timmy_9: {fileID: 8300000, guid: ccb652b1653dccc40a7a620dcfef6ad6, type: 3}
+  timmy_10: {fileID: 8300000, guid: 516002efc22142c48a8ce54126a37b37, type: 3}
+  timmy_11: {fileID: 8300000, guid: d41c04b325305e848beef36443e08553, type: 3}
+  timmy_12: {fileID: 8300000, guid: cd841834092b0064d987bc4c46474b6e, type: 3}
+  uah_Timmy: {fileID: 8300000, guid: 0b774f968e2c66c4ca27fec8e10a8a03, type: 3}
 --- !u!82 &316883874
 AudioSource:
   m_ObjectHideFlags: 0

@@ -17,9 +17,12 @@ public class PlayerMotorNew : MonoBehaviour
     private int backFront = 0; // 0 = Back, 1 = Front
     private Vector2 laneTargetPos;
 
+    private AudioController audioCtrl;
+
     // Use this for initialization
     void Start()
     {
+        audioCtrl = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioController>();
         player = GameObject.FindGameObjectWithTag("Player");
         laneTarget = GameObject.FindGameObjectWithTag("TargetPoint");
         InitializeLanePos();
@@ -64,6 +67,7 @@ public class PlayerMotorNew : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //Debug.Log("Tab detected");
+            GreetJimmy();
         }
     }
 
@@ -155,5 +159,26 @@ public class PlayerMotorNew : MonoBehaviour
         rightLaneBack = tempPos;
         tempPos.y = tempPos.y + FRONT_BACK_DISTANCE;
         rightLaneFront = tempPos;
+    }
+
+
+    private void GreetJimmy()
+    {
+        /**
+         * Here I need to make the logic that checks if the player is close enough
+         * to Jimmy to greet him. That means he is in the Right or Left lane, depending on which
+         * sidewalk Jimmy is walking in.
+         * This is going to be made when I have made the Jimmy gameobject, and spawns him eventually.
+         * **/
+        audioCtrl.GreetJimmySound();
+        /**
+         * If the player is not close to Jimmy, he will then que another sound effect. And that should
+         * be one of Timmy's 27 sound effects. I have made a lot, to be able to make a lot of variations.
+         * **/
+
+        /**
+         * Another TODO might be to make him not start the game by saying one of his sounds.
+         * As of now, when the game is started by tapping, he will start the sound effect.
+         * This might not be the final result, because it could be fun if it started by him yelling his name.**/
     }
 }

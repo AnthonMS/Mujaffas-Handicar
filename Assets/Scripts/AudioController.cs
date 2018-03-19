@@ -9,7 +9,18 @@ public class AudioController : MonoBehaviour
     public AudioClip heKilledKenny;
     public AudioClip splat;
     public AudioClip crash;
-    
+
+    [Header("Timmy Sounds")]
+    public AudioClip greetJimmy;
+    public AudioClip ahh_Timmy_retarded;
+    public AudioClip hua, hua_2, hua_3, hua_4, hua_5;
+    public AudioClip luAla_Timmy, luAla_Timmy_2;
+    public AudioClip tim_Timmy, tim_Timmy_2, tim_Timmy_3;
+    public AudioClip timmy_Scream;
+    public AudioClip timmy_Shit;
+    public AudioClip timmy_timmy;
+    public AudioClip timmy, timmy_2, timmy_3, timmy_4, timmy_5, timmy_6, timmy_7, timmy_8, timmy_9, timmy_10, timmy_11, timmy_12;
+    public AudioClip uah_Timmy;
 
     // Use this for initialization
     void Start ()
@@ -38,5 +49,25 @@ public class AudioController : MonoBehaviour
     public void PlayCrash()
     {
         audioSrc.PlayOneShot(crash);
+    }
+
+    public void GreetJimmySound()
+    {
+        // Check if the audio source is playing, if not, play greeting.
+        // This Includes the crash sound and HeKilledKenny sound
+        if (!audioSrc.isPlaying)
+            audioSrc.PlayOneShot(greetJimmy);
+    }
+
+    public void PlayTimmySound()
+    {
+
+    }
+
+    private AudioClip GetTimmySound()
+    {
+        AudioClip tempClip = ahh_Timmy_retarded;
+
+        return tempClip;
     }
 }
