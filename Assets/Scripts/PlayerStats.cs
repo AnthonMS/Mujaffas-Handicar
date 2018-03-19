@@ -11,6 +11,7 @@ public class PlayerStats : MonoBehaviour
     public float highScore;
     public float tier = 0;
     public float tierIncrease = 100;
+    public float maxTier = 8;
 
     [Header("Canvas Stuff")]
     public Image healthBar;
@@ -78,7 +79,7 @@ public class PlayerStats : MonoBehaviour
         canvas.SendMessage("SetScoreText", score.ToString("0"));
 
         // Max tier is 10, only increase if lower than max tier
-        if (tier < 10)
+        if (tier < maxTier)
         {
             if (score > lastTierIncrease + tierIncrease)
                 IncreaseTier();
@@ -116,6 +117,7 @@ public class PlayerStats : MonoBehaviour
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().copCarSpeed += 0.5f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().busSpeed += 0.5f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().kennyFollowBgSpeed += 0.5f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().kennyCrossingSpeed += 0.3f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnEverySec -= 0.3f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnKennyEverySec -= 0.3f;
     }

@@ -42,6 +42,15 @@ public class ColissionController : MonoBehaviour
             float damage = collision.gameObject.GetComponent<KennyMotor>().damage;
             gameObject.SendMessage("TakeDamage", damage);
             gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<KennyMotor>().retractScore);
+
+            SpawnKyleAndStan();
         }
+    }
+
+    private void SpawnKyleAndStan()
+    {
+        GameObject kyleAndStanInstance = Instantiate(Resources.Load("Kyle_And_Stan", typeof(GameObject))) as GameObject;
+        //kyleAndStanInstance.transform.Translate(GetRandomLane());
+        //kyleAndStanInstance.transform.parent = transform;
     }
 }

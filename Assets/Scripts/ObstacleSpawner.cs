@@ -16,6 +16,7 @@ public class ObstacleSpawner : MonoBehaviour
     public float copCarSpeed = 4.5f;
     public float busSpeed = 3.5f;
     public float kennyFollowBgSpeed = 2f;
+    public float kennyCrossingSpeed = 1f;
 
     //private float leftLane = -1.75f;
     //private float rightLane = 1.75f;
@@ -162,7 +163,7 @@ public class ObstacleSpawner : MonoBehaviour
         if (randomInt < 60)
         {
             Vector2 tempLane = GetRandomLane();
-            tempLane.y = tempLane.y + 3.5f;
+            tempLane.y = tempLane.y + 4.5f;
             GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
             carInstance.transform.Translate(tempLane);
             carInstance.transform.parent = transform;
@@ -179,9 +180,9 @@ public class ObstacleSpawner : MonoBehaviour
     private void ExtraDoubleObstacle()
     {
         Vector2 tempLaneLeft = leftLane;
-        tempLaneLeft.y = tempLaneLeft.y + 6f;
+        tempLaneLeft.y = tempLaneLeft.y + 7f;
         Vector2 tempLaneRight = rightLane;
-        tempLaneRight.y = tempLaneRight.y + 6f;
+        tempLaneRight.y = tempLaneRight.y + 7f;
         GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLaneLeft);
         carInstance.transform.parent = transform;
@@ -211,6 +212,7 @@ public class ObstacleSpawner : MonoBehaviour
         kennyInstance.transform.Translate(tempPos);
         kennyInstance.transform.parent = transform;
         kennyInstance.GetComponent<KennyMotor>().followBgSpeed = kennyFollowBgSpeed;
+        kennyInstance.GetComponent<KennyMotor>().crossingSpeed = kennyCrossingSpeed;
         // Call ChangeDir, so if goLeft is false, he will go left to right and Sprite is flipped
         kennyInstance.SendMessage("ChangeDir", goLeft);
     }

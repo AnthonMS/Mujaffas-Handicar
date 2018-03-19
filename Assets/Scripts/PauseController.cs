@@ -35,7 +35,7 @@ public class PauseController : MonoBehaviour
             muteMotor = false;
         else if (canvasMngr.muteTier == 2)
             muteMotor = true;
-        motorSrc.mute = muteMotor;
+        motorSrc.mute = true;
 
         //endGameCanvas.enabled = false;
         endGamePanel.SetActive(false);
@@ -102,15 +102,5 @@ public class PauseController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().firstSpawn = false;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().restartedGame = true;
-    }
-
-    private void SetDeadScoreText()
-    {
-
-    }
-
-    private void SetDeadHighscoreText()
-    {
-
     }
 }
