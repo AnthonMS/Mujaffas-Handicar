@@ -163,7 +163,7 @@ public class ObstacleSpawner : MonoBehaviour
         if (randomInt < 60)
         {
             Vector2 tempLane = GetRandomLane();
-            tempLane.y = tempLane.y + 4.5f;
+            tempLane.y = tempLane.y + 3.5f;
             GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
             carInstance.transform.Translate(tempLane);
             carInstance.transform.parent = transform;
@@ -180,9 +180,9 @@ public class ObstacleSpawner : MonoBehaviour
     private void ExtraDoubleObstacle()
     {
         Vector2 tempLaneLeft = leftLane;
-        tempLaneLeft.y = tempLaneLeft.y + 7f;
+        tempLaneLeft.y = tempLaneLeft.y + 6f;
         Vector2 tempLaneRight = rightLane;
-        tempLaneRight.y = tempLaneRight.y + 7f;
+        tempLaneRight.y = tempLaneRight.y + 6f;
         GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLaneLeft);
         carInstance.transform.parent = transform;
