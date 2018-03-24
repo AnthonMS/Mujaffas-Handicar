@@ -9,6 +9,7 @@ public class AudioController : MonoBehaviour
     public AudioClip heKilledKenny;
     public AudioClip splat;
     public AudioClip crash;
+    public AudioClip seeYouTimTim;
 
     [Header("Timmy Sounds")]
     public AudioClip greetJimmy;
@@ -57,6 +58,12 @@ public class AudioController : MonoBehaviour
         // This Includes the crash sound and HeKilledKenny sound
         //if (!audioSrc.isPlaying)
             audioSrc.PlayOneShot(greetJimmy);
+        Invoke("GreetTimmySound", 1f);
+    }
+
+    private void GreetTimmySound()
+    {
+        audioSrc.PlayOneShot(seeYouTimTim);
     }
 
     public void PlayTimmySound()
