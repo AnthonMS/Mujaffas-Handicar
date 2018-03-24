@@ -23,9 +23,13 @@ public class PlayerMotorTouch : MonoBehaviour
     private int backFront = 0; // 0 = Back, 1 = Front
     private Vector2 laneTargetPos;
 
+    // Other stuff
+    private AudioController audioCtrl;
+
     // Use this for initialization
     void Start ()
     {
+        audioCtrl = GameObject.FindGameObjectWithTag("AudioManager").GetComponent<AudioController>();
         player = GameObject.FindGameObjectWithTag("Player");
         laneTarget = GameObject.FindGameObjectWithTag("TargetPoint");
         InitializeLanePos();
@@ -100,11 +104,15 @@ public class PlayerMotorTouch : MonoBehaviour
                 }
                 else
                 {   //It's a tap as the drag distance is less than 20% of the screen height
-                    Debug.Log("Tap");
+                    //Debug.Log("Tap");
                     PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
-                    if (pauseController.gameEnded == false)
+                    if (pauseController.gameEnded == false && pauseController.isPaused == true)
                     {
                         pauseController.TabToStart();
+                    }
+                    else
+                    {
+                        GreetJimmy();
                     }
                 }
             }
@@ -178,6 +186,31 @@ public class PlayerMotorTouch : MonoBehaviour
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.forward);
         player.transform.rotation = Quaternion.Slerp(player.transform.rotation, rotation, 5 * Time.deltaTime);
+    }
+
+    private void GreetJimmy()
+    {
+        GameObject jimmyInstance = GameObject.FindGameObjectWithTag("Jimmy");
+        if (jimmyInstance != null)
+        {
+            //Debug.Log("Jimmy is on the sidewalk!");
+            if (transform.position.y + 3f > jimmyInstance.transform.position.y &&
+                transform.position.y - 3f < jimmyInstance.transform.position.y &&
+                transform.position.x < jimmyInstance.transform.position.x + 2f &&
+                transform.position.x > jimmyInstance.transform.position.x - 2f)
+            {
+                if (jimmyInstance.GetComponent<JimmyMotor>().hasGreeted == false)
+                {
+                    audioCtrl.GreetJimmySound();
+                    gameObject.SendMessage("AddScore", jimmyInstance.GetComponent<JimmyMotor>().addScore);
+                    jimmyInstance.GetComponent<JimmyMotor>().hasGreeted = true;
+                }
+            }
+            else // Timmy is not in range to greet
+            {
+                audioCtrl.PlayTimmySound();
+            }
+        }
     }
 
     private void InitializeLanePos()

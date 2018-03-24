@@ -18,6 +18,7 @@ TagManager:
   - HUDcanvas
   - Road
   - Road1
+  - Jimmy
   layers:
   - Default
   - TransparentFX

@@ -48,10 +48,9 @@ public class PlayerStats : MonoBehaviour
             
 
             // Call this method with Invoke, because if we call it right away, it shows the wrong score in the EndGame menu
-            //Invoke("SendEndGameMessage", 0.05f);
+            Invoke("SendEndGameMessage", 0.05f);
         }
         healthBar.fillAmount = CalculateHealth();
-        //Debug.Log("You took " + damage + " damage, you have " + health + " left");
     }
 
     private void SendEndGameMessage()
@@ -65,6 +64,11 @@ public class PlayerStats : MonoBehaviour
         this.score -= score;
         if (this.score <= 0)
             this.score = 0;
+    }
+
+    public void AddScore(float score)
+    {
+        this.score += score;
     }
 
     private float CalculateHealth()

@@ -10,6 +10,8 @@ public class ObstacleSpawner : MonoBehaviour
     public float spawnKennyEverySec = 14;
     public bool firstSpawn = true;
     public bool restartedGame;
+    private float lastJimmy;
+    public float spawnJimmyEverySec = 16;
 
     public float blueCarSpeed = 3f;
     public float chefsCarSpeed = 4f;
@@ -50,6 +52,11 @@ public class ObstacleSpawner : MonoBehaviour
             // Spawn Kenny
             SpawnKenny();
             lastKenny = Time.time;
+        }
+        if (Time.time > lastJimmy + spawnJimmyEverySec)
+        {
+            SpawnJimmy();
+            lastJimmy = Time.time;
         }
     }
 
@@ -215,6 +222,26 @@ public class ObstacleSpawner : MonoBehaviour
         kennyInstance.GetComponent<KennyMotor>().crossingSpeed = kennyCrossingSpeed;
         // Call ChangeDir, so if goLeft is false, he will go left to right and Sprite is flipped
         kennyInstance.SendMessage("ChangeDir", goLeft);
+    }
+
+    private void SpawnJimmy()
+    {
+        int randomInt = Random.Range(1, 3);
+        if (randomInt == 1)
+        {
+            // spawn Jimmy on the left sidewalk
+            GameObject jimmyInstance = Instantiate(Resources.Load("Jimmy", typeof(GameObject))) as GameObject;
+            //jimmyInstance.transform.Translate(tempVec);
+            jimmyInstance.transform.parent = transform;
+        }
+        else
+        {
+            // spawn Jimmy on the right sidewalk
+            Vector2 tempVec = new Vector2(5.8f, 6);
+            GameObject jimmyInstance = Instantiate(Resources.Load("Jimmy", typeof(GameObject))) as GameObject;
+            jimmyInstance.transform.Translate(tempVec);
+            jimmyInstance.transform.parent = transform;
+        }
     }
 
     private Vector2 GetRandomLane()

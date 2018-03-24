@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PauseController : MonoBehaviour
 {
-    private bool isPaused = true;
+    public bool isPaused = true;
     public bool gameEnded = false;
     [Header("Canvas Stuff")]
     public Canvas endGameCanvas;

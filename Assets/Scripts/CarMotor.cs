@@ -46,14 +46,14 @@ public class CarMotor : MonoBehaviour
             if (collision.transform.position.y > transform.position.y)
             {
                 // If the car that hits is behind this car
-                Debug.Log(collision.name+" hit other car");
+                //Debug.Log(collision.name+" hit other car");
                 Vector2 tempVec = collision.transform.position;
                 tempVec.y += 1.5f;
                 collision.transform.position = tempVec;
             }
             else
             {
-                Debug.Log(collision.name + " got hit from behind");
+                //Debug.Log(collision.name + " got hit from behind");
             }
         }
     }

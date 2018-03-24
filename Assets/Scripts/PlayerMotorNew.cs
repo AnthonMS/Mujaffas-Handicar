@@ -164,21 +164,26 @@ public class PlayerMotorNew : MonoBehaviour
 
     private void GreetJimmy()
     {
-        /**
-         * Here I need to make the logic that checks if the player is close enough
-         * to Jimmy to greet him. That means he is in the Right or Left lane, depending on which
-         * sidewalk Jimmy is walking in.
-         * This is going to be made when I have made the Jimmy gameobject, and spawns him eventually.
-         * **/
-        audioCtrl.GreetJimmySound();
-        /**
-         * If the player is not close to Jimmy, he will then que another sound effect. And that should
-         * be one of Timmy's 27 sound effects. I have made a lot, to be able to make a lot of variations.
-         * **/
-
-        /**
-         * Another TODO might be to make him not start the game by saying one of his sounds.
-         * As of now, when the game is started by tapping, he will start the sound effect.
-         * This might not be the final result, because it could be fun if it started by him yelling his name.**/
+        GameObject jimmyInstance = GameObject.FindGameObjectWithTag("Jimmy");
+        if (jimmyInstance != null)
+        {
+            //Debug.Log("Jimmy is on the sidewalk!");
+            if (transform.position.y + 3f > jimmyInstance.transform.position.y &&
+                transform.position.y - 3f < jimmyInstance.transform.position.y &&
+                transform.position.x < jimmyInstance.transform.position.x + 2f &&
+                transform.position.x > jimmyInstance.transform.position.x - 2f)
+            {
+                if (jimmyInstance.GetComponent<JimmyMotor>().hasGreeted == false)
+                {
+                    audioCtrl.GreetJimmySound();
+                    gameObject.SendMessage("AddScore", jimmyInstance.GetComponent<JimmyMotor>().addScore);
+                    jimmyInstance.GetComponent<JimmyMotor>().hasGreeted = true;
+                }
+            }
+            else // Timmy is not in range to greet
+            {
+                audioCtrl.PlayTimmySound();
+            }
+        }
     }
 }
