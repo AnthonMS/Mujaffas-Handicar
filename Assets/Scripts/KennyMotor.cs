@@ -15,11 +15,13 @@ public class KennyMotor : MonoBehaviour
     {
         // This will just destroy Kenny if he lives longer than 15 seconds. (He will be long gone fromt he screen by then)
         Destroy(gameObject, 15f);
-	}
+        followBgSpeed = GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed;
+    }
 	
 	// Update is called once per frame
 	void Update ()
     {
+        followBgSpeed = GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed;
         if (goLeft)
         {
             transform.Translate(new Vector2(-crossingSpeed * Time.deltaTime, -followBgSpeed * Time.deltaTime));

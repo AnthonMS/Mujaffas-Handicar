@@ -22,6 +22,10 @@ public class PlayerStats : MonoBehaviour
     private float scoreIncreaseSpeed = 10;
     private float lastTier;
     private float lastTierIncrease;
+    private bool justHit = false;
+    private bool isProtecting = false;
+    private bool isBoosting = false;
+    private float boostingTime = 7f;
 
     // Use this for initialization
     void Start ()
@@ -38,19 +42,82 @@ public class PlayerStats : MonoBehaviour
         CalculateScore();
         
 	}
+    // Start boosting, by making bg's, cars's, Jimmy's, and Kenny's speed * 2 
+    public void SetBoosting(bool tempBool)
+    {
+        if (!isBoosting)
+        {
+            Invoke("StopBoosting", boostingTime);
+
+            scoreIncreaseSpeed *= 2;
+            isProtecting = tempBool;
+            GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().isBoosting = tempBool;
+            //GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnEverySec /= 2;
+            isBoosting = tempBool;
+            GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed *= 2;
+            GameObject.FindGameObjectWithTag("Road1").GetComponent<BackgroundManager>().speed *= 2;
+
+            GameObject[] carList = GameObject.FindGameObjectsWithTag("Car");
+            if (carList.Length > 0)
+            {
+                foreach (GameObject car in carList)
+                {
+                    car.GetComponent<CarMotor>().speed *= 2;
+                }
+            }
+            GameObject tempJim = GameObject.FindGameObjectWithTag("Jimmy");
+            if (tempJim != null)
+                tempJim.GetComponent<JimmyMotor>().speed *= 2;
+        }
+    }
+    // Stop boosting, by making bg's, cars's, Jimmy's, and Kenny's speed / 2 
+    private void StopBoosting()
+    {
+        scoreIncreaseSpeed /= 2;
+        isProtecting = false;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().isBoosting = false;
+        //GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnEverySec *= 2;
+        isBoosting = false;
+        //BackgroundManager tempRoad = GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>();
+        GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed /= 2;
+        GameObject.FindGameObjectWithTag("Road1").GetComponent<BackgroundManager>().speed /= 2;
+        GameObject[] carList = GameObject.FindGameObjectsWithTag("Car");
+        if (carList.Length > 0)
+        {
+            //Debug.Log("There are " + carList.Length + " Cars in the screen");
+            foreach (GameObject car in carList)
+            {
+                car.GetComponent<CarMotor>().speed /= 2;
+            }
+        }
+        GameObject tempJim = GameObject.FindGameObjectWithTag("Jimmy");
+        if (tempJim != null)
+            tempJim.GetComponent<JimmyMotor>().speed /= 2;
+    }
 
     public void TakeDamage(float damage)
     {
-        this.health -= damage;
-        if (this.health <= 0)
+        if (!isProtecting && !justHit)
         {
-            this.health = 0;
-            
+            justHit = true;
+            Invoke("SetJustHit", 0.5f);
+            this.health -= damage;
+            if (this.health <= 0)
+            {
+                this.health = 0;
 
-            // Call this method with Invoke, because if we call it right away, it shows the wrong score in the EndGame menu
-            Invoke("SendEndGameMessage", 0.05f);
+
+                // Call this method with Invoke, because if we call it right away, it shows the wrong score in the EndGame menu
+                Invoke("SendEndGameMessage", 0.05f);
+            }
+            healthBar.fillAmount = CalculateHealth();
         }
-        healthBar.fillAmount = CalculateHealth();
+        
+    }
+
+    private void SetJustHit()
+    {
+        justHit = false;
     }
 
     private void SendEndGameMessage()

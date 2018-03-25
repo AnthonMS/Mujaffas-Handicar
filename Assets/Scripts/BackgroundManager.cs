@@ -8,12 +8,14 @@ public class BackgroundManager : MonoBehaviour
     private float bgVerticalHeight;
     //private float bgHorizontalLength;
     public float speed = 5f;
+    public float orgSpeed;
 
     // Use this for initialization
     void Start ()
     {
         bgVerticalHeight = GetComponent<Renderer>().bounds.size.y;
         //bgHorizontalLength = GetComponent<Renderer>().bounds.size.x;
+        orgSpeed = speed;
     }
 	
 	// Update is called once per frame

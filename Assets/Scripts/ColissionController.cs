@@ -45,6 +45,19 @@ public class ColissionController : MonoBehaviour
 
             SpawnKyleAndStan();
         }
+        else if (collision.gameObject.tag == "Booster")
+        {
+            //Debug.Log("You hit a booster");
+            gameObject.SendMessage("SetBoosting", true);
+        }
+        else if (collision.gameObject.tag == "Shield")
+        {
+
+        }
+        else if (collision.gameObject.tag == "Repairs")
+        {
+
+        }
     }
 
     private void SpawnKyleAndStan()

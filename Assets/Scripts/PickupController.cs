@@ -2,17 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JimmyMotor : MonoBehaviour
+public class PickupController : MonoBehaviour
 {
-    public float speed;
-    public bool hasGreeted = false;
-    public float addScore = 50;
+    private float speed;
 
 	// Use this for initialization
 	void Start ()
     {
         speed = GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed;
-        speed += 0.5f;
 	}
 	
 	// Update is called once per frame

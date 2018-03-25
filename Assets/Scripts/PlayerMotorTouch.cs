@@ -128,11 +128,10 @@ public class PlayerMotorTouch : MonoBehaviour
 
         Vector2 touchPosWorld2D = new Vector2(touchPosWorld.x, touchPosWorld.y);
         RaycastHit2D hitInformation = Physics2D.Raycast(touchPosWorld2D, Camera.main.transform.forward);
-        Debug.Log(touchPosWorld2D);
 
         if (touchPosWorld2D.x > 2.3f && touchPosWorld2D.y > 4.3f)
         {
-            Debug.Log("Trying to press the mute button!");
+            //Debug.Log("Trying to press the mute button!");
         }
         else
         {
@@ -215,7 +214,7 @@ public class PlayerMotorTouch : MonoBehaviour
         GameObject jimmyInstance = GameObject.FindGameObjectWithTag("Jimmy");
         if (jimmyInstance != null)
         {
-            //Debug.Log("Jimmy is on the sidewalk!");
+            // This checks if Timmy's position is in range of Jimmy
             if (transform.position.y + 3f > jimmyInstance.transform.position.y &&
                 transform.position.y - 3f < jimmyInstance.transform.position.y &&
                 transform.position.x < jimmyInstance.transform.position.x + 2f &&
@@ -233,6 +232,11 @@ public class PlayerMotorTouch : MonoBehaviour
                 audioCtrl.PlayTimmySound();
             }
         }
+    }
+
+    public void StartBoost()
+    {
+
     }
 
     private void InitializeLanePos()

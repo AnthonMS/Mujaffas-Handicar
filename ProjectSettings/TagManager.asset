@@ -19,6 +19,9 @@ TagManager:
   - Road
   - Road1
   - Jimmy
+  - Booster
+  - Shield
+  - Repair
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,8 @@ public class ObstacleSpawner : MonoBehaviour
     private float lastJimmy;
     public float spawnJimmyEverySec = 16;
 
+    public bool isBoosting = false;
+
     public float blueCarSpeed = 3f;
     public float chefsCarSpeed = 4f;
     public float copCarSpeed = 4.5f;
@@ -88,7 +90,7 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(templane);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = blueCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(blueCarSpeed);
         if (ExtraObstacle() == false)
         {
             ExtraDoubleObstacle();
@@ -101,7 +103,7 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Chefs_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(GetRandomLane());
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = chefsCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(chefsCarSpeed);
         if (ExtraObstacle() == false)
         {
             ExtraDoubleObstacle();
@@ -114,11 +116,11 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Chefs_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(leftLane);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = chefsCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(chefsCarSpeed);
         carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(rightLane);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = blueCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(blueCarSpeed);
 
         //Debug.Log("Spawned Obstacle4");
     }
@@ -128,7 +130,7 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("School_bus", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(GetRandomLane());
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = busSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(busSpeed);
         if (ExtraObstacle() == false)
         {
             ExtraDoubleObstacle();
@@ -143,7 +145,7 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Cop_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLane);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = copCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(copCarSpeed);
         if (ExtraObstacle() == false)
         {
             ExtraDoubleObstacle();
@@ -156,11 +158,11 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Cop_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(leftLane);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = copCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(copCarSpeed);
         carInstance = Instantiate(Resources.Load("School_bus", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(middleLane);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = busSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(busSpeed);
         //Debug.Log("Spawned Obstacle7");
     }
     // Random lane, right behind other car, blue car
@@ -174,7 +176,7 @@ public class ObstacleSpawner : MonoBehaviour
             GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
             carInstance.transform.Translate(tempLane);
             carInstance.transform.parent = transform;
-            carInstance.GetComponent<CarMotor>().speed = blueCarSpeed;
+            carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(blueCarSpeed);
             //Debug.Log("Spawned ExtraObstacle");
             return true;
         }
@@ -193,11 +195,11 @@ public class ObstacleSpawner : MonoBehaviour
         GameObject carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLaneLeft);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = blueCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(blueCarSpeed);
         carInstance = Instantiate(Resources.Load("Blue_car", typeof(GameObject))) as GameObject;
         carInstance.transform.Translate(tempLaneRight);
         carInstance.transform.parent = transform;
-        carInstance.GetComponent<CarMotor>().speed = blueCarSpeed;
+        carInstance.GetComponent<CarMotor>().speed = CheckIfBoosting(blueCarSpeed);
         //Debug.Log("Spawned ExtraDoubleObstacle");
     }
 
@@ -264,5 +266,15 @@ public class ObstacleSpawner : MonoBehaviour
             tempVec = leftLane;
         }
         return tempVec;
+    }
+
+    private float CheckIfBoosting(float regSpd)
+    {
+        float tempSpd;
+        if (isBoosting)
+            tempSpd = regSpd * 2;
+        else
+            tempSpd = regSpd;
+        return tempSpd;
     }
 }
