@@ -128,27 +128,14 @@ public class PlayerMotorTouch : MonoBehaviour
 
         Vector2 touchPosWorld2D = new Vector2(touchPosWorld.x, touchPosWorld.y);
         RaycastHit2D hitInformation = Physics2D.Raycast(touchPosWorld2D, Camera.main.transform.forward);
+        Debug.Log(touchPosWorld2D);
 
-        if (hitInformation.collider != null)
+        if (touchPosWorld2D.x > 2.3f && touchPosWorld2D.y > 4.3f)
         {
-            //We should have hit something with a 2D Physics collider!
-            GameObject touchedObject = hitInformation.transform.gameObject;
-            if (touchedObject.transform.tag == "MuteBtn")
-            {
-                //Debug.Log("Touched " + touchedObject.transform.name);
-                //ClickButton(touchedObject, false);
-                //return true;
-            }
-            else
-            {
-                Debug.Log("Touched " + touchedObject.transform.tag);
-                //return false;
-            }
-
+            Debug.Log("Trying to press the mute button!");
         }
         else
         {
-            // We did not touch any button, so start the game
             PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
             pauseController.TabToStart();
         }
