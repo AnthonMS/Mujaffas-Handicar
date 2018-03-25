@@ -108,7 +108,11 @@ public class PlayerMotorTouch : MonoBehaviour
                     PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
                     if (pauseController.gameEnded == false && pauseController.isPaused == true)
                     {
-                        pauseController.TabToStart();
+                        Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
+                        CheckButtonClick(touchPos);
+                        // If the CheckButtonClick is not working, this under was the old code. (Cannot test on my PC for some reason, only laptop)
+                        /*PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
+                        pauseController.TabToStart();*/
                     }
                     else
                     {
@@ -116,6 +120,38 @@ public class PlayerMotorTouch : MonoBehaviour
                     }
                 }
             }
+        }
+    }
+
+    private void CheckButtonClick(Vector2 touchPosWorld)
+    {
+        
+
+        Vector2 touchPosWorld2D = new Vector2(touchPosWorld.x, touchPosWorld.y);
+        RaycastHit2D hitInformation = Physics2D.Raycast(touchPosWorld2D, Camera.main.transform.forward);
+
+        if (hitInformation.collider != null)
+        {
+            //We should have hit something with a 2D Physics collider!
+            GameObject touchedObject = hitInformation.transform.gameObject;
+            if (touchedObject.transform.tag == "MuteBtn")
+            {
+                //Debug.Log("Touched " + touchedObject.transform.name);
+                //ClickButton(touchedObject, false);
+                //return true;
+            }
+            else
+            {
+                Debug.Log("Touched " + touchedObject.transform.tag);
+                //return false;
+            }
+
+        }
+        else
+        {
+            // We did not touch any button, so start the game
+            PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
+            pauseController.TabToStart();
         }
     }
 
