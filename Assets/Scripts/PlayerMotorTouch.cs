@@ -111,8 +111,7 @@ public class PlayerMotorTouch : MonoBehaviour
                         Vector2 touchPos = Camera.main.ScreenToWorldPoint(touch.position);
                         CheckButtonClick(touchPos);
                         // If the CheckButtonClick is not working, this under was the old code. (Cannot test on my PC for some reason, only laptop)
-                        /*PauseController pauseController = GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>();
-                        pauseController.TabToStart();*/
+                        /*pauseController.TabToStart();*/
                     }
                     else
                     {
