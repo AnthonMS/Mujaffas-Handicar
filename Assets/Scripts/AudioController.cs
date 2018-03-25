@@ -58,7 +58,7 @@ public class AudioController : MonoBehaviour
         // This Includes the crash sound and HeKilledKenny sound
         //if (!audioSrc.isPlaying)
             audioSrc.PlayOneShot(greetJimmy);
-        Invoke("GreetTimmySound", 1f);
+        Invoke("GreetTimmySound", 0.7f);
     }
 
     private void GreetTimmySound()

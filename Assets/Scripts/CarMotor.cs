@@ -45,15 +45,22 @@ public class CarMotor : MonoBehaviour
             
             if (collision.transform.position.y > transform.position.y)
             {
-                // If the car that hits is behind this car
-                //Debug.Log(collision.name+" hit other car");
-                Vector2 tempVec = collision.transform.position;
-                tempVec.y += 1.5f;
-                collision.transform.position = tempVec;
-            }
-            else
-            {
-                //Debug.Log(collision.name + " got hit from behind");
+                // Back car
+
+                // This checks that the car that got hit is in the screen view. 
+                // If not, it just spawned, and we can move the other car a little back.
+                if (transform.position.y < 4f)
+                {
+                    // If it is though, we need to just change the speed of this car 
+                    // to the other cars speed so it looks like it's being pushed
+                    speed = collision.gameObject.GetComponent<CarMotor>().speed;
+                }
+                else
+                {
+                    Vector2 tempVec = collision.transform.position;
+                    tempVec.y += 1.5f;
+                    collision.transform.position = tempVec;
+                }
             }
         }
     }

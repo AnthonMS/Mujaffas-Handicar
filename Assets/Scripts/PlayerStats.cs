@@ -121,8 +121,11 @@ public class PlayerStats : MonoBehaviour
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().copCarSpeed += 0.5f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().busSpeed += 0.5f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().kennyFollowBgSpeed += 0.5f;
-        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().kennyCrossingSpeed += 0.3f;
+        GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().kennyCrossingSpeed += 0.1f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnEverySec -= 0.3f;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().spawnKennyEverySec -= 0.3f;
+        // Increase timmy's speed as well, so it gets a bit easier to dodge the cars
+        gameObject.GetComponent<PlayerMotorNew>().speed += 0.3f;
+        gameObject.GetComponent<PlayerMotorTouch>().speed += 0.3f;
     }
 }
