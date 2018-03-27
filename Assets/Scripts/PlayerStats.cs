@@ -24,7 +24,7 @@ public class PlayerStats : MonoBehaviour
     private float lastTierIncrease;
     private bool justHit = false;
     private bool isProtecting = false;
-    private bool isBoosting = false;
+    public bool isBoosting = false;
     private float boostingTime = 7f;
 
     // Use this for initialization
@@ -48,6 +48,14 @@ public class PlayerStats : MonoBehaviour
         if (!isBoosting)
         {
             Invoke("StopBoosting", boostingTime);
+
+            // Start the boost particle effect
+            GameObject boostParticle = Instantiate(Resources.Load("Boost_Particles", typeof(GameObject))) as GameObject;
+            Vector2 tempPos = transform.position;
+            tempPos.y = tempPos.y + 0.5f;
+            boostParticle.transform.position = tempPos;
+            boostParticle.transform.parent = transform;
+            boostParticle.transform.localScale = new Vector3(1, 1, 1);
 
             scoreIncreaseSpeed *= 2;
             isProtecting = tempBool;
@@ -73,6 +81,10 @@ public class PlayerStats : MonoBehaviour
     // Stop boosting, by making bg's, cars's, Jimmy's, and Kenny's speed / 2 
     private void StopBoosting()
     {
+        // Destroy the boost particles
+        GameObject boostParticles = GameObject.FindGameObjectWithTag("BoostParticles");
+        Destroy(boostParticles);
+
         scoreIncreaseSpeed /= 2;
         isProtecting = false;
         GameObject.FindGameObjectWithTag("ObstacleSpawner").GetComponent<ObstacleSpawner>().isBoosting = false;

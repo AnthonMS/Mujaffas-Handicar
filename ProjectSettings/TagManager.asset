@@ -23,6 +23,8 @@ TagManager:
   - Shield
   - Repair
   - Shield_Pickup
+  - BoostParticles
+  - ExplosionParticles
   layers:
   - Default
   - TransparentFX

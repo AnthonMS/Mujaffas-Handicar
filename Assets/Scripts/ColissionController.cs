@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ColissionController : MonoBehaviour
 {
-    //private GameObject player;
+    private GameObject player;
+    private PlayerStats playerStats;
     private GameObject audioObject;
     private AudioSource audioSrc;
     private AudioController audioCtrl;
@@ -12,7 +13,8 @@ public class ColissionController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        //player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = player.GetComponent<PlayerStats>();
         audioObject = GameObject.FindGameObjectWithTag("AudioManager");
         //audioSrc = audioObject.GetComponent<AudioSource>();
         audioCtrl = audioObject.GetComponent<AudioController>();
@@ -30,10 +32,22 @@ public class ColissionController : MonoBehaviour
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Car")
         {
-            audioCtrl.PlayCrash();
-            float damage = collision.gameObject.GetComponent<CarMotor>().damage;
-            gameObject.SendMessage("TakeDamage", damage);
-            gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<CarMotor>().retractScore);
+            if (!playerStats.isBoosting)
+            {
+                audioCtrl.PlayCrash();
+                float damage = collision.gameObject.GetComponent<CarMotor>().damage;
+                gameObject.SendMessage("TakeDamage", damage);
+                gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<CarMotor>().retractScore);
+            }
+            else
+            {
+                Destroy(collision.gameObject);
+                GameObject explosionInstance = Instantiate(Resources.Load("Explosion_Particles", typeof(GameObject))) as GameObject;
+                explosionInstance.transform.position = collision.transform.position;
+                //explosionInstance.transform.parent = collision.transform;
+                gameObject.SendMessage("AddScore", collision.gameObject.GetComponent<CarMotor>().retractScore);
+            }
+            
         }
         else if (collision.gameObject.tag == "Kenny")
         {
