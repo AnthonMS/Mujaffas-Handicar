@@ -22,6 +22,7 @@ TagManager:
   - Booster
   - Shield
   - Repair
+  - Shield_Pickup
   layers:
   - Default
   - TransparentFX
