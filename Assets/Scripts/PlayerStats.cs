@@ -95,6 +95,31 @@ public class PlayerStats : MonoBehaviour
             tempJim.GetComponent<JimmyMotor>().speed /= 2;
     }
 
+    public void StartShield()
+    {
+        isProtecting = true;
+        GameObject shieldInstance = Instantiate(Resources.Load("Shield", typeof(GameObject))) as GameObject;
+        shieldInstance.transform.position = transform.position;
+        shieldInstance.transform.parent = transform;
+        Invoke("StopShield", 10f);
+    }
+
+    private void StopShield()
+    {
+        isProtecting = false;
+        GameObject shieldInstance = GameObject.FindGameObjectWithTag("Shield");
+        Destroy(shieldInstance);
+    }
+
+    public void GiveHealth(float health)
+    {
+        if (this.health < maxHealth)
+        {
+            this.health += health;
+        }
+        healthBar.fillAmount = CalculateHealth();
+    }
+    
     public void TakeDamage(float damage)
     {
         if (!isProtecting && !justHit)

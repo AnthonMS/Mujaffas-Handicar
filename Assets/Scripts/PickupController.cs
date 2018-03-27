@@ -15,6 +15,7 @@ public class PickupController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        speed = GameObject.FindGameObjectWithTag("Road").GetComponent<BackgroundManager>().speed;
         transform.Translate(new Vector2(0, -speed * Time.deltaTime));
         CheckIfBelowScreen();
     }

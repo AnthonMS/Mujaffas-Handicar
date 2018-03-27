@@ -50,13 +50,16 @@ public class ColissionController : MonoBehaviour
             //Debug.Log("You hit a booster");
             gameObject.SendMessage("SetBoosting", true);
         }
-        else if (collision.gameObject.tag == "Shield")
+        else if (collision.gameObject.tag == "Shield_Pickup")
         {
-
+            gameObject.SendMessage("StartShield");
+            Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.tag == "Repairs")
+        else if (collision.gameObject.tag == "Repair")
         {
-
+            //Debug.Log("Repair timmy's vehicle!");
+            gameObject.SendMessage("GiveHealth", 25f);
+            Destroy(collision.gameObject);
         }
     }
 
