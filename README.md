@@ -24,5 +24,5 @@ I have considered adding in so, if you tab on the screen and you are close to pe
 For more info about progress and Future Features I refer to the [Project Board.](https://github.com/AnthonMS/Mujaffas-Handicar/projects/1) <br /> 
 
 
-<h3>Screenshots</h3>
+[<h3>Screenshots</h3>](#screenshots-in-the-bottom)
 <h5>Coming soon</h5>
