@@ -3,7 +3,7 @@
 This is a game I am making in my spare time, it is going to be on Mobile devices, probably only on Android as Iphone sucks and is waaaay to expensive to get a developer account and release apps on the store. (Plus I am not sure if I can just make it to Iphone, I don't know if the code needs to be different for Apple products).
 <br /><br />
 <h4>Screenshots in the bottom</h4>
-<br /><br />
+<br />
 <h3>Description</h3>
 It is a endless "runner", runner in quotation marks, because you are not running, you are driving a wheelchair. It is going to be a mix between the old web game "Mujaffas BMW" and "Subway Surfers"
 <br /><br />
