@@ -18,7 +18,7 @@ To give more gameplay I have added Jimmy into the game as well, he walks on the 
 For more fun, I have added a couple pick up items. These include a repair, so you get some health back. A boost on the ground, this will make it so you drive twice as fast with rocket fire shooting out the back of the wheelchair and if you hit a car, you will not loose health, instead the car will blow up and give you the same amount of bonus points you would have lost if you were not boosting. And the last item I have added so far is a shield, if you pick this one up, a blue shield will surround you, and you cannot take damage from cars, they will not blow up, but they won't damage you.
 
 <h3>Future Features</h3>
-I have considered adding in so, if you tab on the screen and you are close to pedestrian, Timmy should pick him/her up and drive some time with them, and if you don't die before the passenger gets off, you get some extra points. If this becomes a reality, I have thought about making it so, if you hit a car with a passenger, the passenger will get out before time, and you some points should be retracted from your score.
+I have considered adding in so, if you tab on the screen and you are close to pedestrian, Timmy should pick him/her up and drive some time with them, and if you don't die before the passenger gets off, you get some extra points. If this becomes a reality, I have thought about making it so, if you hit a car with a passenger, the passenger will get out before time, and some points should be retracted from your score.
 <br /><br />
 
 For more info about progress and Future Features I refer to the [Project Board.](https://github.com/AnthonMS/Mujaffas-Handicar/projects/1) <br /> 
