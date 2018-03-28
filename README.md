@@ -19,7 +19,7 @@ For more fun, I have added a couple pick up items. These include a repair, so yo
 
 <h3>Future Features</h3>
 I have considered adding in so, if you tab on the screen and you are close to pedestrian, Timmy should pick him/her up and drive some time with them, and if you don't die before the passenger gets off, you get some extra points. If this becomes a reality, I have thought about making it so, if you hit a car with a passenger, the passenger will get out before time, and you some points should be retracted from your score.
-<br />
+<br /><br />
 
 For more info about progress and Future Features I refer to the [Project Board.](http://github.com) <br /> 
 
