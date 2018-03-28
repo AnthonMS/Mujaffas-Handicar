@@ -72,7 +72,9 @@ public class CanvasManager : MonoBehaviour
         {
             musicSrc.mute = false;
             //musicSrc.Play();
-            motorSrc.mute = false;
+            // If game is not paused
+            if (!GameObject.FindGameObjectWithTag("PauseController").GetComponent<PauseController>().isPaused)
+                motorSrc.mute = false;
             effectsSrc.mute = false;
             muteBtn.GetComponent<Image>().sprite = speakerFullIcon;
             muteTier = 0;
