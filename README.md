@@ -22,7 +22,9 @@ I have considered adding in so, if you tab on the screen and you are close to pe
 <br />
 For more info about progress and Future Features I refer to the [Project Board.] (http://github.com) <br /> 
 
-[Project Board.] (http://github.com)
+[Project Board.](http://github.com)
+
+[GitHub](http://github.com)
 
 
 <h3>Screenshots</h3>
