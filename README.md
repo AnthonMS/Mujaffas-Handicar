@@ -22,6 +22,10 @@ I have considered adding in so, if you tab on the screen and you are close to pe
 <br />
 For more info about progress and Future Features I refer to the Project Board. <br />
 This site was built using [GitHub Pages](https://pages.github.com/).
+[I'm an inline-style link](https://www.google.com)
+
+[I'm a reference-style link][https://www.google.com reference text]
+
 
 <h3>Screenshots</h3>
 <h5>Coming soon</h5>
