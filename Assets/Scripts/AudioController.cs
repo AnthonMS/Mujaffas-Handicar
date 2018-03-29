@@ -10,6 +10,11 @@ public class AudioController : MonoBehaviour
     public AudioClip splat;
     public AudioClip crash;
     public AudioClip seeYouTimTim;
+    public AudioClip crash_explosion;
+    public AudioClip crash_shielded;
+    public AudioClip rocket_thrust;
+    public AudioClip shield_pickup;
+    public AudioClip repair_pickup;
 
     [Header("Timmy Sounds")]
     public AudioClip greetJimmy;
@@ -52,6 +57,16 @@ public class AudioController : MonoBehaviour
         audioSrc.PlayOneShot(crash);
     }
 
+    public void PlayExplosion()
+    {
+        audioSrc.PlayOneShot(crash_explosion);
+    }
+
+    public void PlayCrashShielded()
+    {
+        audioSrc.PlayOneShot(crash_shielded);
+    }
+
     public void GreetJimmySound()
     {
         // Check if the audio source is playing, if not, play greeting.
@@ -70,6 +85,21 @@ public class AudioController : MonoBehaviour
     {
         if (!audioSrc.isPlaying)
             audioSrc.PlayOneShot(GetTimmySound());
+    }
+
+    public void PlayRocketThrust()
+    {
+        audioSrc.PlayOneShot(rocket_thrust);
+    }
+
+    public void PlayShieldPickup()
+    {
+        audioSrc.PlayOneShot(shield_pickup);
+    }
+
+    public void PlayRepairPickup()
+    {
+        audioSrc.PlayOneShot(repair_pickup);
     }
 
     private AudioClip GetTimmySound()

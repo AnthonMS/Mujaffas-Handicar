@@ -444,6 +444,11 @@ MonoBehaviour:
   splat: {fileID: 8300000, guid: c16313e946a6d6244a86e2245428d344, type: 3}
   crash: {fileID: 8300000, guid: 04c188efa85fcdc46bc95493ea402918, type: 3}
   seeYouTimTim: {fileID: 8300000, guid: b2e349a13ae958740a00dd8b9485935a, type: 3}
+  crash_explosion: {fileID: 8300000, guid: df712dae12720b54a801f174dfdb73e9, type: 3}
+  crash_shielded: {fileID: 8300000, guid: 9b1e4dea97d284a42a3279c593ac6512, type: 3}
+  rocket_thrust: {fileID: 8300000, guid: bb428ac6e7c7f2441a60059b4d39ebb4, type: 3}
+  shield_pickup: {fileID: 8300000, guid: 6e95b23aa0cee7c41965e04713696652, type: 3}
+  repair_pickup: {fileID: 8300000, guid: 1e40745de52e84f4ea76282fd01e096a, type: 3}
   greetJimmy: {fileID: 8300000, guid: 02a295a1c0ebfab41913456ba795118e, type: 3}
   ahh_Timmy_retarded: {fileID: 8300000, guid: 1becf7daa69898a4ba11da6814e8e3e9, type: 3}
   hua: {fileID: 8300000, guid: 98754ca333c998e40b7f8a91a1d59260, type: 3}
@@ -1187,6 +1192,7 @@ RectTransform:
   - {fileID: 641595907}
   - {fileID: 1429382652}
   - {fileID: 114436064}
+  - {fileID: 1497054571}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1456,6 +1462,7 @@ MonoBehaviour:
   endGamePanel: {fileID: 1198704731}
   deadScoreText: {fileID: 994106091}
   deadHighscoreText: {fileID: 94895491}
+  highScoreText: {fileID: 1497054572}
 --- !u!224 &1312533360
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1595,6 +1602,80 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1429382651}
+--- !u!1 &1497054570
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1497054571}
+  - component: {fileID: 1497054573}
+  - component: {fileID: 1497054572}
+  m_Layer: 5
+  m_Name: HighscoreText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1497054571
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497054570}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.9999999, y: 0.9999999, z: 0.9999999}
+  m_Children: []
+  m_Father: {fileID: 981751158}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 0.000030517578, y: -130}
+  m_SizeDelta: {x: 347.7, y: 91.4}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1497054572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497054570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 1, b: 0.006896496, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: a2b05321c33ab964388217b336293736, type: 3}
+    m_FontSize: 56
+    m_FontStyle: 1
+    m_BestFit: 0
+    m_MinSize: 6
+    m_MaxSize: 134
+    m_Alignment: 7
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 0
+--- !u!222 &1497054573
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1497054570}
 --- !u!1 &1512026850
 GameObject:
   m_ObjectHideFlags: 0
@@ -1624,7 +1705,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1512026850}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63338c06d5ad5664190f8c5c7ebdab83, type: 3}
   m_Name: 
@@ -1693,7 +1774,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1512026850}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c284557e69dd7744ebe79156c6999a34, type: 3}
   m_Name: 
@@ -1789,6 +1870,7 @@ MonoBehaviour:
   maxTier: 8
   healthBar: {fileID: 244879511}
   canvas: {fileID: 981751157}
+  isShielded: 0
   isBoosting: 0
 --- !u!1001 &1804358383
 Prefab:

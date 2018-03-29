@@ -13,6 +13,7 @@ public class PauseController : MonoBehaviour
     public GameObject endGamePanel;
     public Text deadScoreText;
     public Text deadHighscoreText;
+    public Text highScoreText;
 
     private GameObject audioMan;
     //private AudioSource effectsSrc; // AudioSource 0
@@ -24,6 +25,9 @@ public class PauseController : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        float temphighscore = PlayerPrefs.GetFloat("Highscore");
+        highScoreText.text = temphighscore.ToString("0");
+
         audioMan = GameObject.FindGameObjectWithTag("AudioManager");
         //effectsSrc = audioMan.GetComponents<AudioSource>()[0];
         motorSrc = audioMan.GetComponents<AudioSource>()[1];
@@ -75,6 +79,7 @@ public class PauseController : MonoBehaviour
         {
             Time.timeScale = 1;
             GameObject.FindGameObjectWithTag("TabToPlay").SetActive(false);
+            highScoreText.enabled = false;
             motorSrc.mute = muteMotor;
         }  
         else

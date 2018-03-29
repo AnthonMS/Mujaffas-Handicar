@@ -18,20 +18,26 @@ public class PlayerStats : MonoBehaviour
     public Canvas canvas;
 
     // Private stuff
+    private GameObject audioObject;
+    private AudioSource audioSrc;
+    private AudioController audioCtrl;
     private float maxHealth = 100;
     private float scoreIncreaseSpeed = 10;
     private float lastTier;
     private float lastTierIncrease;
     private bool justHit = false;
     private bool isProtecting = false;
-    private bool isShielded = false;
+    public bool isShielded = false;
     public bool isBoosting = false;
     private float boostingTime = 7f;
 
     // Use this for initialization
     void Start ()
     {
-        // hello world
+        audioObject = GameObject.FindGameObjectWithTag("AudioManager");
+        audioSrc = audioObject.GetComponent<AudioSource>();
+        audioCtrl = audioObject.GetComponent<AudioController>();
+
         healthBar.fillAmount = CalculateHealth();
 
         CheckHighscore();

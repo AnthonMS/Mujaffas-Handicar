@@ -29,19 +29,23 @@ public class ColissionController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        gameObject.SendMessage("PrintBoolVals");
+        //gameObject.SendMessage("PrintBoolVals");
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Car")
         {
             if (!playerStats.isBoosting)
             {
-                audioCtrl.PlayCrash();
+                if (playerStats.isShielded)
+                    audioCtrl.PlayCrashShielded();
+                else
+                    audioCtrl.PlayCrash();
                 float damage = collision.gameObject.GetComponent<CarMotor>().damage;
                 gameObject.SendMessage("TakeDamage", damage);
                 gameObject.SendMessage("RetractScore", collision.gameObject.GetComponent<CarMotor>().retractScore);
             }
             else
             {
+                audioCtrl.PlayExplosion();
                 Destroy(collision.gameObject);
                 GameObject explosionInstance = Instantiate(Resources.Load("Explosion_Particles", typeof(GameObject))) as GameObject;
                 explosionInstance.transform.position = collision.transform.position;
@@ -62,17 +66,18 @@ public class ColissionController : MonoBehaviour
         }
         else if (collision.gameObject.tag == "Booster")
         {
-            //Debug.Log("You hit a booster");
+            audioCtrl.PlayRocketThrust();
             gameObject.SendMessage("SetBoosting", true);
         }
         else if (collision.gameObject.tag == "Shield_Pickup")
         {
+            audioCtrl.PlayShieldPickup();
             gameObject.SendMessage("StartShield");
             Destroy(collision.gameObject);
         }
         else if (collision.gameObject.tag == "Repair")
         {
-            //Debug.Log("Repair timmy's vehicle!");
+            audioCtrl.PlayRepairPickup();
             gameObject.SendMessage("GiveHealth", 25f);
             Destroy(collision.gameObject);
         }
