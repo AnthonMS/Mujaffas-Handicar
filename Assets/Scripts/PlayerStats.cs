@@ -24,6 +24,7 @@ public class PlayerStats : MonoBehaviour
     private float lastTierIncrease;
     private bool justHit = false;
     private bool isProtecting = false;
+    private bool isShielded = false;
     public bool isBoosting = false;
     private float boostingTime = 7f;
 
@@ -109,16 +110,17 @@ public class PlayerStats : MonoBehaviour
 
     public void StartShield()
     {
-        isProtecting = true;
+        isShielded = true;
         GameObject shieldInstance = Instantiate(Resources.Load("Shield", typeof(GameObject))) as GameObject;
         shieldInstance.transform.position = transform.position;
+        shieldInstance.transform.rotation = Quaternion.identity;
         shieldInstance.transform.parent = transform;
         Invoke("StopShield", 10f);
     }
 
     private void StopShield()
     {
-        isProtecting = false;
+        isShielded = false;
         GameObject shieldInstance = GameObject.FindGameObjectWithTag("Shield");
         Destroy(shieldInstance);
     }
@@ -134,7 +136,7 @@ public class PlayerStats : MonoBehaviour
     
     public void TakeDamage(float damage)
     {
-        if (!isProtecting && !justHit)
+        if (!isShielded && !isProtecting && !justHit)
         {
             justHit = true;
             Invoke("SetJustHit", 0.5f);
@@ -231,5 +233,10 @@ public class PlayerStats : MonoBehaviour
         // Increase timmy's speed as well, so it gets a bit easier to dodge the cars
         gameObject.GetComponent<PlayerMotorNew>().speed += 0.3f;
         gameObject.GetComponent<PlayerMotorTouch>().speed += 0.3f;
+    }
+
+    public void PrintBoolVals()
+    {
+        Debug.Log("Protected: " + isProtecting + ", Shielded: " + isShielded + ", Boosting: " + isBoosting);
     }
 }

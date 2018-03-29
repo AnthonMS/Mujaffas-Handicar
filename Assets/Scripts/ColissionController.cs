@@ -29,6 +29,7 @@ public class ColissionController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        gameObject.SendMessage("PrintBoolVals");
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Car")
         {
