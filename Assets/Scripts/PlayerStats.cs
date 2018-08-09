@@ -34,6 +34,7 @@ public class PlayerStats : MonoBehaviour
     // Use this for initialization
     void Start ()
     {
+        //SetBoosting(true);
         audioObject = GameObject.FindGameObjectWithTag("AudioManager");
         audioSrc = audioObject.GetComponent<AudioSource>();
         audioCtrl = audioObject.GetComponent<AudioController>();

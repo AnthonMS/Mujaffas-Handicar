@@ -33,6 +33,7 @@ public class ObstacleSpawner : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
+        //SpawnJimmy();
         // This checks if the time is lower than 1, if true, 
         // the game has just been started and an obstacle needs to be spawned right away, if false,
         // the game has been restarted after death and the update will spawn Obstacles because time is larger than last spawn

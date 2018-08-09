@@ -17,6 +17,7 @@ public class AudioController : MonoBehaviour
     public AudioClip repair_pickup;
 
     [Header("Timmy Sounds")]
+    public AudioSource timmySrc;
     public AudioClip greetJimmy;
     public AudioClip ahh_Timmy_retarded;
     public AudioClip hua, hua_2, hua_3, hua_4, hua_5;
@@ -72,7 +73,7 @@ public class AudioController : MonoBehaviour
         // Check if the audio source is playing, if not, play greeting.
         // This Includes the crash sound and HeKilledKenny sound
         //if (!audioSrc.isPlaying)
-            audioSrc.PlayOneShot(greetJimmy);
+            timmySrc.PlayOneShot(greetJimmy);
         Invoke("GreetTimmySound", 0.7f);
     }
 
@@ -83,8 +84,8 @@ public class AudioController : MonoBehaviour
 
     public void PlayTimmySound()
     {
-        if (!audioSrc.isPlaying)
-            audioSrc.PlayOneShot(GetTimmySound());
+        if (!timmySrc.isPlaying)
+            timmySrc.PlayOneShot(GetTimmySound());
     }
 
     public void PlayRocketThrust()
